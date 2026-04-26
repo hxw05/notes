@@ -18,7 +18,7 @@ const { frontmatter } = useData()
             <div v-if="frontmatter.date" class="vp-doc-date">
                 发布于 {{ frontmatter.date }}
             </div>
-            <h3 v-if="frontmatter.origin.title" class="vp-doc-pre-title">
+            <h3 v-if="frontmatter.origin?.title" class="vp-doc-pre-title">
                 {{ frontmatter.origin.title }}
             </h3>
         </template>
