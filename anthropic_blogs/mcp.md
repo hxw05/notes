@@ -3,10 +3,11 @@ date: 2026/04/22
 origin:
   link: https://claude.com/blog/what-is-model-context-protocol
   date: 2025-10-31
+  title: What is Model Context Protocol? Connect AI to your world
   subtitle: Connect AI assistants to your tools without custom integrations using Model Context Protocol.
 ---
 
-# What is Model Context Protocol? Connect AI to your world
+# 何为MCP？将AI与你的世界相连
 
 > AI models are only as good as the context provided to them.
 

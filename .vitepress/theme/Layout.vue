@@ -15,25 +15,25 @@ const { frontmatter } = useData()
 <template>
     <Layout>
         <template #doc-before>
-            <div class="vp-doc-before">
-                <div v-if="frontmatter.date" class="vp-doc-date">
-                    发布于 {{ frontmatter.date }}
-                </div>
+            <div v-if="frontmatter.date" class="vp-doc-date">
+                发布于 {{ frontmatter.date }}
             </div>
+            <h3 v-if="frontmatter.origin.title" class="vp-doc-pre-title">
+                {{ frontmatter.origin.title }}
+            </h3>
         </template>
     </Layout>
 </template>
 
 <style lang="css">
-.vp-doc-before {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 5px;
-}
-
 .vp-doc-date {
     color: var(--vp-c-text-2);
+    margin-bottom: 8px;
+}
+
+.vp-doc-pre-title {
+    margin-bottom: 3px;
+    font-size: 110%;
 }
 
 .medium-zoom-overlay {
