@@ -2,10 +2,11 @@
 date: 2026/04/23
 origin:
   link: https://claude.com/blog/best-practices-for-prompt-engineering
+  title: Best practices for prompt engineering
   subtitle: Get better AI results with prompt engineering techniques from the team behind Claude.
   date: 2025-11-10
 ---
-# Best practices for prompt engineering
+# 提示词工程最佳实践
 
 :::warning 本文可能中英文混杂
 原文是英文，而一些内容可能保留为英文更好理解，所以就懒得翻译了，请知悉。
