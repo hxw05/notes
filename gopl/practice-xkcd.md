@@ -8,7 +8,7 @@
 
 ![](./pratice-xkcd.png)
 
-## 代码仓库
+## 源代码
 
 https://github.com/hxw05/gopl-practice-xkcd
 
@@ -106,7 +106,7 @@ if err != nil {
 ```
 
 
-## 总结、感想与建议
+## 总结
 
 这个程序综合运用了http、html/template和json包提供的功能，实现了一个前后端不分离架构下的数据展示网页，从第三方（xkcd）获得数据。上一次接触这种不分离的架构大概是我在初中的时候写PHP。
 
