@@ -35,7 +35,8 @@ const vitePressSidebarOptions: VitePressSidebarOptions = {
 	collapsed: true,
 	capitalizeFirst: false,
 	useTitleFromFileHeading: true,
-	sortMenusByFrontmatterOrder: true
+	sortMenusByFrontmatterOrder: true,
+	excludeFilesByFrontmatterFieldName: 'hidden'
 };
 
 // https://vitepress.dev/reference/site-config
