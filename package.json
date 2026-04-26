@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "docs:dev": "vitepress dev .",
+    "docs:build": "vitepress build .",
+    "docs:preview": "vitepress preview ."
+  },
+  "dependencies": {
+    "markdown-it-cjk-friendly": "^2.0.2",
+    "medium-zoom": "^1.1.0",
+    "vitepress": "^1.6.4"
+  },
+  "devDependencies": {
+    "markdown-it-mathjax3": "^4.3.2",
+    "vitepress-sidebar": "^1.33.1"
+  }
+}
