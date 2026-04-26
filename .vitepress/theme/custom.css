@@ -55,3 +55,7 @@
 .vp-doc ul li, .vp-doc ol li {
     line-height: 28px;
 }
+
+.vp-doc img + em {
+    color: var(--vp-c-text-2);
+}
