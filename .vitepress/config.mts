@@ -26,7 +26,7 @@ const vitepressConfig: UserConfig<DefaultTheme.Config> = {
 					}
 				}
 			});
-			md.use(markdownItFootnotePlugin)
+			md.use(markdownItFootnotePlugin);
 		}
 	},
 	lang: 'zh'
