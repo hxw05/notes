@@ -1,6 +1,6 @@
 # whxnotes
 
-如无明确说明，本网站上的所有原创内容均为人类编写，以 CC BY-SA 4.0 协议开放。
+如无说明，本网站上的所有原创内容均为人类编写，以 CC BY-SA 4.0 协议开放。
 
 ## Projects
 
@@ -14,5 +14,6 @@
 
 ## Overview
 
-|Project|总字数|笔记数量|最近更新时间|
-|:-:|:-:|:-:|:-:|
+<OverviewCards />
+
+<ProjectTable/>
