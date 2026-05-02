@@ -3,7 +3,7 @@ hidden: true
 ---
 # CLAUDE.md
 
-Note: The frontmatter is required since everything of markdown format is considered a part of the website. Its sole use is to exclude this file from the website with no any other intention.
+Note: The frontmatter is required since everything of markdown format under the project root is considered a concrete part of the website. Its sole use is to exclude this file from the website with no any other intention.
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
