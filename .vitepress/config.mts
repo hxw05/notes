@@ -14,7 +14,7 @@ const vitepressConfig: UserConfig<DefaultTheme.Config> = {
 		outline: {
 			label: '目录',
 			level: [2, 3]
-		},
+		}
 	},
 	markdown: {
 		config: md => {
@@ -22,7 +22,11 @@ const vitepressConfig: UserConfig<DefaultTheme.Config> = {
 			md.use(markdownItMathjax3Plugin, {
 				tex: {
 					macros: {
-						'\\set': '{\\{#1\\}}'
+						'\\set': '{\\{#1\\}}',
+						'Z': '\\mathbb{Z}',
+						'R': '\\mathbb{R}',
+						'Q': '\\mathbb{Q}',
+						'C': '\\mathbb{C}'
 					}
 				}
 			});
