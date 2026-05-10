@@ -15,7 +15,9 @@
 - https://github.com/AvdLee/SwiftUI-Agent-Skill
 - https://github.com/haider-nawaz/liquid-glass-skill
 
-然而没有什么用。但我仔细看了一下Skill本身，写的并没有什么问题。所以怀疑是DeepSeek与Claude Code里的Claude生态不是很兼容导致的，没办法。
+然而没有什么用。我仔细看了一下Skill本身，写的没有问题，都是有用的内容。所以怀疑是DeepSeek与Claude Code里的Claude生态不是很兼容导致的。
+
+在这里补充一句：后来我在提示词里面让DeepSeek注意使用Skill，然后他就知道调用了...
 
 ## 尝试自己拯救 Toolbar 的设计
 
