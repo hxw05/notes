@@ -1,9 +1,13 @@
+---
+date: 2026/05/10
+---
 # DeepSeek 似乎不会写 Liquid Glass UI
 
 尝试了一下用DeepSeek v4 Pro+Claude Code来vibe一个简单的CRUD客户端项目，发现它可以说对iOS 26的液态玻璃风格和组件是一窍不通。
 - 做出来的Toolbar一点也不像iOS 26里的设计，但它却在iOS 26上运行，所以最后看上去很怪。
 - Modal Form的左上角和右上角依然是过去的“取消”和“完成”，而不是iOS 26里面常见的勾和叉。
-- 页面中主要组件没有一点iOS 26的味道，并且有很多莫名其妙的分割线缩进或者重合。
+- 页面中主要组件没有一点iOS 26的味道，并且有很多莫名其妙的分割线缩进或者重合，显然是拼凑导致的。
+- Glass按钮的设计不正常，而且也不知道怎么去修改，东拼西凑。
 
 我反复强调要使用Liquid Glass中的common pratice，换来的是更加奇怪的实现，越来越差，这更说明DeepSeek是没有iOS 26 Swift UI的相关编程储备的。心疼我的Token`(╯‵□′)╯︵┻━┻`
 
@@ -15,9 +19,9 @@
 - https://github.com/AvdLee/SwiftUI-Agent-Skill
 - https://github.com/haider-nawaz/liquid-glass-skill
 
-然而没有什么用。我仔细看了一下Skill本身，写的没有问题，都是有用的内容。所以怀疑是DeepSeek与Claude Code里的Claude生态不是很兼容导致的。
+然而没有什么用，它根本不会调用Skill，即使我明确指出想让它实现Liquid Glass UI。我仔细看了一下Skill本身，写的没有问题而且都是有用的内容。我怀疑是DeepSeek与Claude Code里的Claude生态不是很兼容导致的。
 
-在这里补充一句：后来我在提示词里面让DeepSeek注意使用Skill，然后他就知道调用了...
+补充一句：后来我在提示词里面让DeepSeek注意使用Skill，他才知道调用...效果也就那样，一些细枝末节仍然无法正确实现，且仍然摆脱不了知识盲区带来的拼凑问题。
 
 ## 尝试自己拯救 Toolbar 的设计
 
@@ -58,11 +62,9 @@ struct ToolsToolbar: ToolbarContent {
 
 于是我直接上手修改，一发入魂。我个人认为这部分代码还是很好理解的，哪怕你完全没有接触过Swift也可以上手改。
 
-## 教育 DeepSeek
+## 教 DeepSeek 写 Toolbar
 
-有了范例之后就可以让DeepSeek模仿了，事实证明模仿的挺好。我让DeepSeek将这三个placement好好记住，写进CLAUDE.md。这些写入的内容在后面让它重构所有Modal Form的左上角和右上角（将“取消”和“确定”修改为图标，并在右上角使用`.confirmationAction`）的过程中起到了关键的作用。
-
-它写入的内容主要是下面的这个表：
+有了范例之后就可以让DeepSeek模仿了。于是我让DeepSeek将这三个placement的用法写进CLAUDE.md，主要是下面的这个表：
 | Placement | Usage | Example |
 |---|---|---|
 | `.primaryAction` | Group of toolbar actions (filters, search, sort, more menu) | `ToolbarItemGroup(placement: .primaryAction)` |
@@ -70,7 +72,7 @@ struct ToolsToolbar: ToolbarContent {
 | `.cancellationAction` | Cancel/dismiss in modal forms | `ToolbarItem(placement: .cancellationAction)` |
 | `.destructiveAction` | Destructive operations (delete) | `ToolbarItem(placement: .destructiveAction)` |
 
-以及pattern：
+以及下面的代码pattern：
 ```swift
 .toolbar {
     ToolbarItemGroup(placement: .primaryAction) {
@@ -83,51 +85,67 @@ struct ToolsToolbar: ToolbarContent {
 }
 ```
 
-:::details 生成的完整与Liquid Glass相关CLAUDE.md内容
+这些写入的内容在后面让它重构所有Modal Form的左上角和右上角（将“取消”和“确定”修改为图标，并在右上角使用`.confirmationAction`）的过程中起到了关键的作用。
+
+## 也不会写按钮
+
+通过在提示词里面加入“记得使用Skill”的提示，DeepSeek确实可以实现出Liquid Glass按钮了，但完全称不上是一步到位。
+
+```swift
+content
+    .font(.headline)
+    .frame(maxWidth: .infinity)
+    .buttonStyle(.glassProminent)
+    .padding(.vertical, 14)
+```
+
+![](./IMG_0434.jpg) *玻璃是有了，但是...*
+
+由于我对这块也不熟悉，所以只能从现象出发给它修改建议。
+
 ```markdown
-### Liquid Glass Toolbar Design
-
-All toolbars follow iOS 26+ Liquid Glass placement semantics. Never hand-style toolbar buttons — let the system render them based on semantic placement.
-
-**Placement rules:**
-
-| Placement | Usage | Example |
-|---|---|---|
-| `.primaryAction` | Group of toolbar actions (filters, search, sort, more menu) | `ToolbarItemGroup(placement: .primaryAction)` |
-| `.confirmationAction` | The single most important action on the page (create, save, register) | `ToolbarItem(placement: .confirmationAction)` |
-| `.cancellationAction` | Cancel/dismiss in modal forms | `ToolbarItem(placement: .cancellationAction)` |
-| `.destructiveAction` | Destructive operations (delete) | `ToolbarItem(placement: .destructiveAction)` |
-
-**Layout pattern for list/detail views with both action group and a primary button:**
-
-```swift
-.toolbar {
-    ToolbarItemGroup(placement: .primaryAction) {
-        // filter buttons, sort menus, etc.
-    }
-    ToolbarSpacer(.flexible)
-    ToolbarItem(placement: .confirmationAction) {
-        Button("创建", systemImage: "plus") { showCreate = true }
-    }
-}
+当前修改的liquid glass样式是正确的，但是这些按钮太小且没有跟先前那样占满整行。请全部修改，让按钮占满整行。
 ```
 
-**Layout pattern for modal forms:**
+它得出的结论是，`.frame(maxWidth: .infinity)`的效果可能被`.buttonStyle(.glassProminent)`覆盖了，所以要将frame放在buttonStyle的后面...然而实际上这并没有什么作用。
 
-```swift
-.toolbar {
-    ToolbarItem(placement: .cancellationAction) {
-        Button("取消") { dismiss() }
-    }
-    ToolbarItem(placement: .confirmationAction) {
-        Button("保存") { ... }
-    }
-}
-```
+> 问题很清楚：iOS 26+ 路径中 `.frame(maxWidth: .infinity)` 在 `.buttonStyle()` 之前，只扩展了 label 而不是整个按钮。Liquid Glass 按钮样式会使用自身的内容尺寸，不会继承 label 的 frame。需要将 frame 移到 buttonStyle 之后。
 
-**Key rules:**
-- Never use `.topBarLeading` / `.topBarTrailing` — these are legacy. Use semantic placements above.
-- Never apply `.background(.blue)`, `.clipShape(Capsule())`, or manual padding to toolbar buttons. The system styles `.confirmationAction` buttons with Liquid Glass automatically.
-- Use `Button("label", systemImage: "icon")` for labeled buttons, `Image(systemName:)` with `.font(.subheadline.weight(.medium))` for icon-only buttons inside `.primaryAction` groups.
-```
-:::
+所以我再一次需要自己解决这个问题。搜到了Reddit上的[这个帖子](https://www.reddit.com/r/SwiftUI/comments/1pejnuo/ios_26_how_can_you_make_the_bottom_bar_button_go/)，提到了iOS 26的新API`.buttonSizing(.flexible)`，替换之后宽度就正常了。
+
+![](./IMG_0432.jpg) *宽度正常，但是上下边距太小*
+
+但仍然有种别扭的感觉，因为按钮的上下边距太小了。显然DeepSeek是有考虑到上下边距的：`.padding(.vertical, 14)`，但没有实质作用。让DeepSeek来思考怎么改，它又一次得出了链顺序不对的结论...然后我就受不了，去问ChatGPT了。ChatGPT也好不到哪里去。它让我把padding放在buttonStyle的前面，结论与DeepSeek完全相反。
+
+> 如果你想增大按钮内部上下间距，需要：[...] 也就是说：
+> - padding 放在 buttonStyle 前面
+> - 让 padding 成为 button label 的一部分
+> 
+> 这是 SwiftUI modifier 顺序问题。
+
+但是下面ChatGPT“顺带提一嘴”环节中提到`.controlSize(.large)`的名称中的“control size”引起了我的兴趣。我试了试，发现就是正确答案。ChatGPT这属于歪打正着。
+
+![](./IMG_0433.jpg) *Exactly what I want!*
+
+按钮这一块，整体上来看，DeepSeek很喜欢对代码进行缝缝补补，这证明它对于正确的practice并没有多少认知。感觉还是因为Swift语言太冷门以及Apple的AI生态孱弱/不重视导致的，至今没有看到什么权威性的与实现或设计相关的Skill、MCP。谁说AI不能替代人类？只要信息足够缺乏，AI也拿你没办法！
+
+附一个DestructiveButtonModifier的最初代码与修改后的代码。虽然前后连行数都没变，但效果是天差地别，而DeepSeek就是不知道这些API。我感觉DeepSeek正在渐渐引起我走上iOS开发的兴趣！
+
+- 最初的代码
+    ```swift
+    content
+        .font(.headline)
+        .buttonStyle(.glass)
+        .tint(.red)
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 14)
+    ```
+- 修改后的代码
+    ```swift
+    content
+        .font(.headline)
+        .buttonStyle(.glass)
+        .tint(.red)
+        .buttonSizing(.flexible)
+        .controlSize(.large)
+    ```
