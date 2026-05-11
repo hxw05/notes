@@ -56,3 +56,8 @@ date: 2026/05/11
 
 ![](./deepseek-still-struggles-with-indentations-after-adopting-python-editing.png) *确实开始用python3编辑了，但继续纠结indentation*
 
+## 上下文腐化依然存在
+
+当对话上下文较长以后，其使用`sed`的行为又回来了。不过这相比不加提示词前选择python的速度要快。或许当上下文再继续累加的时候，它就慢慢地彻底忘了要用python。
+
+![](./sed-is-back-due-to-context-rot.png) *Since you are an LLM, it makes sense.*
