@@ -1,7 +1,7 @@
 {
   "scripts": {
     "gen-stats": "./.vitepress/stats_gen/whxnotes_stats_gen",
-    "docs:dev": "npm run gen-stats && vitepress dev .",
+    "docs:dev": "vitepress dev .",
     "docs:build": "npm run gen-stats && vitepress build .",
     "docs:preview": "vitepress preview ."
   },
