@@ -50,7 +50,7 @@ struct ToolsToolbar: ToolbarContent {
 }
 ```
 
-![](./glassy-toolbar-2.png)
+![](deepseek-cant-do-liquid-glass/glassy-toolbar-2.png)
 *上面代码的效果，来自同一个博客。这也是我见到的“经典”Toolbar布局*
 
 而这段代码的核心是
@@ -99,7 +99,7 @@ content
     .padding(.vertical, 14)
 ```
 
-![](./IMG_0434.jpg) *玻璃是有了，但是...*
+![](deepseek-cant-do-liquid-glass/IMG_0434.jpg) *玻璃是有了，但是...*
 
 由于我对这块也不熟悉，所以只能从现象出发给它修改建议。
 
@@ -113,7 +113,7 @@ content
 
 所以我再一次需要自己解决这个问题。搜到了Reddit上的[这个帖子](https://www.reddit.com/r/SwiftUI/comments/1pejnuo/ios_26_how_can_you_make_the_bottom_bar_button_go/)，提到了iOS 26的新API`.buttonSizing(.flexible)`，替换之后宽度就正常了。
 
-![](./IMG_0432.jpg) *宽度正常，但是上下边距太小*
+![](deepseek-cant-do-liquid-glass/IMG_0432.jpg) *宽度正常，但是上下边距太小*
 
 但仍然有种别扭的感觉，因为按钮的上下边距太小了。显然DeepSeek是有考虑到上下边距的：`.padding(.vertical, 14)`，但没有实质作用。让DeepSeek来思考怎么改，它又一次得出了链顺序不对的结论...然后我就受不了，去问ChatGPT了。ChatGPT也好不到哪里去。它让我把padding放在buttonStyle的前面，结论与DeepSeek完全相反。
 
@@ -125,7 +125,7 @@ content
 
 但是下面ChatGPT“顺带提一嘴”环节中提到`.controlSize(.large)`的名称中的“control size”引起了我的兴趣。我试了试，发现就是正确答案。ChatGPT这属于歪打正着。
 
-![](./IMG_0433.jpg) *Exactly what I want!*
+![](deepseek-cant-do-liquid-glass/IMG_0433.jpg) *Exactly what I want!*
 
 按钮这一块，整体上来看，DeepSeek很喜欢对代码进行缝缝补补，这证明它对于正确的practice并没有多少认知。感觉还是因为Swift语言太冷门以及Apple的AI生态孱弱/不重视导致的，至今没有看到什么权威性的与实现或设计相关的Skill、MCP。谁说AI不能替代人类？只要信息足够缺乏，AI也拿你没办法！
 

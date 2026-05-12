@@ -6,7 +6,7 @@
 
 只遇到过一次，应该是模型将宿主机和Guest弄混了。但为什么会出现在这里呢...
 
-![](./deepseek-shows-though-chain-in-claude-code-recap.png)
+![](deepseek-x-claude-code-flashes/deepseek-shows-though-chain-in-claude-code-recap.png)
 
 ## 模型说理解应该是真的理解
 

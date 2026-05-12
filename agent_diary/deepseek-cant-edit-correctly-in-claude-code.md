@@ -11,7 +11,7 @@ date: 2026/05/11
 
 几乎每一次遇到编辑失败，都会进入如下图所示的这样一个流程中：
 
-![](./deepseek-tries-multiple-bash-commands-after-unexpected-edit-falure-in-claude-code.png) *近乎公式化的试错流程，在几十次的使用中见过不下几十次*
+![](deepseek-cant-edit-correctly-in-claude-code/deepseek-tries-multiple-bash-commands-after-unexpected-edit-falure-in-claude-code.png) *近乎公式化的试错流程，在几十次的使用中见过不下几十次*
 
 - 尝试用`sed`接`cat -A`，报错
 - 尝试用`sed`接`od`，以原始字节的形式窥探文件内容
@@ -24,7 +24,7 @@ date: 2026/05/11
 - **倾向于使用`od`和`xxd`来看原始数据，而不是正常的文本数据**：`od`和`xxd`返回的原始数据相比于直接读文本要多很多冗余信息。
 - **编辑失败—重读文件循环**：它倾向于在每一次编辑失败以后，重新读一遍文件。我觉得这可能是Agent框架所设定的规则（Ctrl+O展开来看证明了这一点），目的是让模型能够给出正确的行号和编辑范围，但在当前这种情况下无疑是进一步加剧了token的浪费。
 
-![](./claude-code-edit-failure-detail.png) *编辑失败时的返回*
+![](deepseek-cant-edit-correctly-in-claude-code/claude-code-edit-failure-detail.png) *编辑失败时的返回*
 
 好的一点是，无论怎么折腾，到目前为止我还没有遇到彻底无法写入的场景，跌跌撞撞最后都能写入，也是正确的代码。
 
@@ -49,17 +49,17 @@ date: 2026/05/11
 
 我新开了一个session验证了一下：
 
-![](./deepseek-promises-to-do-as-told.png) *真的听话了吗？*
+![](deepseek-cant-edit-correctly-in-claude-code/deepseek-promises-to-do-as-told.png) *真的听话了吗？*
 
 后面又用了几次，遇到同样的问题的时候，DeepSeek果然就能知道这是在“struggle”。这个时候它就没有尝试使用`sed`之类，而是直接上python。
-![](./deepseek-recognizes-edit-tool-struggles.png) *也许真的听话了*
+![](deepseek-cant-edit-correctly-in-claude-code/deepseek-recognizes-edit-tool-struggles.png) *也许真的听话了*
 
 看来这个提示词确实起到了一定的作用，但没有彻底解决DeepSeek会纠结indentation导致反复read的问题。于是只好在提示词里面写明了除了在写Python的时候，都不需要管indentation的问题，因为用户的电脑上已经安装了prettier、gofmt等工具（大哥你可是烧钱的，怎么非要纠结indentation这几个空白符号😱）。
 
-![](./deepseek-still-struggles-with-indentations-after-adopting-python-editing.png) *确实开始用python3编辑了，但继续纠结indentation*
+![](deepseek-cant-edit-correctly-in-claude-code/deepseek-still-struggles-with-indentations-after-adopting-python-editing.png) *确实开始用python3编辑了，但继续纠结indentation*
 
 ## 上下文腐化依然存在
 
 当对话上下文较长以后，其使用`sed`的行为又回来了。不过这相比不加提示词前选择python的速度要快。或许当上下文再继续累加的时候，它就慢慢地彻底忘了要用python。
 
-![](./sed-is-back-due-to-context-rot.png) *Since you are an LLM, it makes sense.*
+![](deepseek-cant-edit-correctly-in-claude-code/sed-is-back-due-to-context-rot.png) *Since you are an LLM, it makes sense.*

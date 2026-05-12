@@ -5,7 +5,7 @@ date: 2026/05/09
 
 OpenClaw大火的时候，我没有考虑去安装，一是因为感觉用不到什么功能，二是看了一下觉得这个东西有些过于庞大了。现在出来了一个Hermes Agent，我原本以为是和Claude Code一样的代码工具，去看了一下发现跟OpenClaw的定位挺像的，并且也没有显得很臃肿，开发团队很有设计感，遂准备下载体验。
 
-刚刚下载的时候，我仍然有一个核心的问题：它到底能拿来干什么？我想了想，既然是一个computer use agent，或许不太需要特别强大的编码能力，所以我果断接入价格很便宜的DeepSeek v4 Flash，先体验一下再说。
+刚刚下载的时候，我仍然有一个核心的问题：它到底能拿来干什么？我想了想，既然是一个日常用途的agent，或许不太需要特别强大的编码能力，所以我果断接入价格很便宜的DeepSeek v4 Flash，先体验一下再说。
 
 ## What can you do? — 自定义文本风格
 
@@ -157,7 +157,7 @@ DeepSeek 提供了 `/user/balance` 接口，用 API Key 认证即可返回余额
 
 最后一句话提醒我关于直接给AI提供API Key的风险所在。
 
-![give it and leak it](give-it-and-leak-it.png) *Give it and it will leak it.*
+![give it and leak it](hermes-agent-1/give-it-and-leak-it.png) *Give it and it will leak it.*
 
 ```markdown
 我倾向于方案A，但是我担心把API给你会在你无意识的情况下以某种形式泄露出去。所以有没有什么比较好的方法既能让你间接拿到APIkey又不会让你看到明文呢？
@@ -173,5 +173,5 @@ DeepSeek 提供了 `/user/balance` 接口，用 API Key 认证即可返回余额
 然而后面我让它为脚本写alias放到`.zshrc`里面的时候，它很自然地读取了`.zshrc`，而里面正躺着我的`ANTHROPIC_AUTH_TOKEN`...为了保险起见，我还是换了一个API Key。
 
 最终实现的效果还可以：
-![](./deepseek-balance-watch.png)
+![](hermes-agent-1/deepseek-balance-watch.png)
 
