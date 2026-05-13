@@ -54,7 +54,7 @@ date: 2026/05/11
 后面又用了几次，遇到同样的问题的时候，DeepSeek果然就能知道这是在“struggle”。这个时候它就没有尝试使用`sed`之类，而是直接上python。
 ![](deepseek-cant-edit-correctly-in-claude-code/deepseek-recognizes-edit-tool-struggles.png) *也许真的听话了*
 
-看来这个提示词确实起到了一定的作用，但没有彻底解决DeepSeek会纠结indentation导致反复read的问题。于是只好在提示词里面写明了除了在写Python的时候，都不需要管indentation的问题，因为用户的电脑上已经安装了prettier、gofmt等工具（大哥你可是烧钱的，怎么非要纠结indentation这几个空白符号😱）。
+看来这个提示词确实起到了一定的作用，但没有彻底解决DeepSeek会纠结indentation导致反复read的问题（因为agent框架的提示词是这样给的）。于是只好在提示词里面写明了除了在写Python的时候，都不需要管indentation的问题，因为用户的电脑上已经安装了prettier、gofmt等工具。
 
 ![](deepseek-cant-edit-correctly-in-claude-code/deepseek-still-struggles-with-indentations-after-adopting-python-editing.png) *确实开始用python3编辑了，但继续纠结indentation*
 
@@ -63,3 +63,11 @@ date: 2026/05/11
 当对话上下文较长以后，其使用`sed`的行为又回来了。不过这相比不加提示词前选择python的速度要快。或许当上下文再继续累加的时候，它就慢慢地彻底忘了要用python。
 
 ![](deepseek-cant-edit-correctly-in-claude-code/sed-is-back-due-to-context-rot.png) *Since you are an LLM, it makes sense.*
+
+## 缺点
+
+无论是使用命令行工具还是REPL进行编辑，都脱离了Claude Code原本的框架，这就导致Claude Code无法追踪代码的变化。这样带来的后果，就是像`/rewind`这样依赖原生Edit等操作的指令无法正常工作。
+
+![](./deepseek-cant-edit-correctly-in-claude-code/claude-code-rewind.png) *每一次对话，Claude Code都会记录文件的编辑情况*
+
+`/rewind`中实现对话记录的回滚很容易，但是对于文件更改的回滚，其并没有用到项目中的VCS，而应该是依靠模型对Edit等tool的调用。如果模型脱离了tool的使用，就无法获知更改的情况。这个时候就需要我们自己去手动管理，也就是勤提交。
