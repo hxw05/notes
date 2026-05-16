@@ -87,7 +87,7 @@ struct ToolsToolbar: ToolbarContent {
 
 这些写入的内容在后面让它重构所有Modal Form的左上角和右上角（将“取消”和“确定”修改为图标，并在右上角使用`.confirmationAction`）的过程中起到了关键的作用。
 
-## 也不会写按钮
+## 它也不会写按钮
 
 通过在提示词里面加入“记得使用Skill”的提示，DeepSeek确实可以实现出Liquid Glass按钮了，但完全称不上是一步到位。
 
