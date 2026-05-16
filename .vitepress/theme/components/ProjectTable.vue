@@ -14,24 +14,27 @@ const keyNames = {
 </script>
 
 <template>
-    <table>
-        <thead>
-            <tr>
-                <th v-for="k in keys">
-                    {{ keyNames[k] }}
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="entry in stats">
-                <td v-for="k in keys">{{ entry[k] }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div style="overflow-x: auto;">
+        <table style="display: table; width: 100%;">
+            <thead>
+                <tr>
+                    <th v-for="k in keys">
+                        {{ keyNames[k] }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="entry in stats">
+                    <td v-for="k in keys">{{ entry[k] }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 
 <style lang="css" scoped>
-th, td {
+th,
+td {
     text-align: center;
 }
 </style>

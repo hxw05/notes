@@ -8,10 +8,6 @@ origin:
 ---
 # 提示词工程最佳实践
 
-:::warning 本文可能中英文混杂
-原文是英文，而一些内容可能保留为英文更好理解，所以就懒得翻译了，请知悉。
-:::
-
 > Prompt engineering is the craft of structuring instructions to get better outputs from AI models. It's how you phrase queries, specify style, provide context, and guide the model's behavior to achieve your goals.
 
 即使在上下文工程乃至驾驭工程流行的今天，提示词工程的作用仍然不容小觑，它是与AI交流的基础构建（essential building blocks）。

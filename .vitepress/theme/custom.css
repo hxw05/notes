@@ -1,46 +1,46 @@
-/* :root {
-    --vp-c-brand-1: #626262;
-    --vp-c-brand-2: #9c9c9c;
-    --vp-c-text-2: #878787;
-    --vp-c-brand-3: #b6b6b6;
-    --vp-badge-tip-bg: #6b728022;
-    --vp-custom-block-tip-bg: #6262621d;
+@import './fonts/roboto-serif-v17-latin/font.css';
+@import './fonts/roboto-v51-latin/font.css';
 
-    --vp-font-family-base: 'Open Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', '微软雅黑', 'Microsoft Yahei', sans-serif;
-    --vp-font-family-mono: 'Cascadia Code', 'Cascadia Mono', Consolas, 'Courier New', Courier, monospace;
+html.font-serif {
+    --vp-font-family-base: 'Roboto Serif', Georgia, 'Times New Roman', '宋体-简', '华文宋体', '宋体', '新宋体', 'SimSun', serif;
 }
-
-.dark {
-    --vp-c-brand-1: #dcdcdc;
-    --vp-c-brand-2: #aeaeae;
-    --vp-c-brand-3: #858585;
-} */
 
 :root {
-    /* 基于 #2196f3 的品牌颜色系列 */
-    --vp-c-brand-1: #15616d;
-    --vp-c-brand-2: #135763;
-    --vp-c-brand-3: #104954;
-    --vp-c-brand-soft: rgba(21, 97, 109, 0.1);
+    /* 基于黑白单色的品牌颜色系列 */
+    --vp-c-brand-1: #1a1a1a;
+    --vp-c-brand-2: #333333;
+    --vp-c-brand-3: #4d4d4d;
+    --vp-c-brand-soft: rgba(0, 0, 0, 0.06);
     /* 补充颜色系列 */
-    --vp-c-brand-light: #187a8c;
-    --vp-c-brand-lighter: #1b94aa;
-    --vp-c-brand-dark: #0f434a;
-    --vp-c-brand-darker: #0a2e33;
+    --vp-c-brand-light: #666666;
+    --vp-c-brand-lighter: #999999;
+    --vp-c-brand-dark: #000000;
+    --vp-c-brand-darker: #000000;
+    --vp-sidebar-bg-color: var(--vp-c-bg);
+    --vp-font-family-base: 'Roboto', sans-serif;
+    --vp-font-family-mono: 'Menlo', 'Cascadia Code', 'Consolas', monospace;
+    /* --vp-custom-block-font-size: var(--vp-font-size); */
 }
 
 .dark {
-    --vp-c-brand-1: #3ecce5;
-    --vp-c-brand-2: #32bbd3;
-    --vp-c-brand-3: #219cb2;
-    --vp-c-brand-soft: rgba(21, 97, 109, 0.15);
+    --vp-c-brand-1: #ffffff;
+    --vp-c-brand-2: #e0e0e0;
+    --vp-c-brand-3: #b0b0b0;
+    --vp-c-brand-soft: rgba(255, 255, 255, 0.1);
+    --vp-c-brand-light: #f5f5f5;
+    --vp-c-brand-lighter: #eaeaea;
+    --vp-c-brand-dark: #999999;
+    --vp-c-brand-darker: #666666;
+    --vp-c-text-1: #dfdfdf;
+    --vp-c-text-2: #989898;
+    --vp-c-text-3: #6a6a6a;
 }
 
 .VPSidebarItem.is-active[class*="level-"] .item .link .text {
     text-decoration: underline
 }
 
-.custom-block {
+.vp-doc .custom-block {
     --vp-code-block-bg: transparent;
 }
 
@@ -52,10 +52,51 @@
     border-color: rgba(255, 255, 255, .1);
 }
 
-.vp-doc ul li, .vp-doc ol li {
+.vp-doc ul li,
+.vp-doc ol li {
     line-height: 28px;
 }
 
-.vp-doc img + em {
+.vp-doc img+em {
+    text-align: center;
+    display: block;
+    margin: 4px auto;
     color: var(--vp-c-text-2);
+    font-size: 14px;
+    font-style: normal;
+}
+
+.vp-doc img {
+    margin: 0 auto;
+    max-width: calc(min(700px, 100%));
+    object-fit: cover;
+}
+
+@media (min-width: 1440px) {
+    .VPSidebar {
+        padding-left: 32px !important;
+        width: calc(16px + var(--vp-sidebar-width) - 32px) !important;
+    }
+
+    .VPNavBar.has-sidebar .container>.title {
+        padding-left: 32px;
+        width: calc(var(--vp-sidebar-width)) !important;
+    }
+
+    .VPNavBar.has-sidebar .container>.content {
+        padding-left: var(--vp-sidebar-width) !important;
+    }
+
+    .VPNavBar.has-sidebar .divider {
+        padding-left: var(--vp-sidebar-width) !important;
+    }
+
+    .Layout>.VPContent.has-sidebar {
+        padding-right: 32px !important;
+        padding-left: calc(var(--vp-sidebar-width) + 16px) !important;
+    }
+
+    .VPContent.has-sidebar .VPDoc.has-aside .content-container {
+        max-width: 1800px !important;
+    }
 }
