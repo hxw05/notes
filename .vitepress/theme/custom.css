@@ -37,7 +37,7 @@ html.font-serif {
     --vp-c-text-3: #6a6a6a;
 }
 
-.VPSidebarItem.is-active[class*="level-"] .item .link .text {
+.VPSidebarItem.is-active[class*="level-"] > .item .link .text {
     text-decoration: underline
 }
 
