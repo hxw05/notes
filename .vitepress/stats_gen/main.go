@@ -131,6 +131,7 @@ func main() {
 			}
 
 			imageCount := countImageReferences(content)
+			content = stripBlockquotes(content)
 			stripped := stripmd.Strip(string(content))
 			counts := countContent(stripped)
 
