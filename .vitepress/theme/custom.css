@@ -1,8 +1,9 @@
 @import './fonts/roboto-serif-v17-latin/font.css';
 @import './fonts/roboto-v51-latin/font.css';
+@import './fonts/noto-serif-sc-v35-chinese-simplified/font.css';
 
 html.font-serif {
-    --vp-font-family-base: 'Roboto Serif', Georgia, 'Times New Roman', '宋体-简', '华文宋体', '宋体', '新宋体', 'SimSun', serif;
+    --vp-font-family-base: 'Roboto Serif', 'Noto Serif SC', Georgia, 'Times New Roman', '宋体-简', '华文宋体', '宋体', '新宋体', 'SimSun', serif;
 }
 
 :root {
