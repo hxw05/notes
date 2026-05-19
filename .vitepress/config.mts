@@ -5,10 +5,12 @@ import markdownItFootnotePlugin from 'markdown-it-footnote';
 import { DefaultTheme, defineConfig, UserConfig } from 'vitepress';
 import { withSidebar } from 'vitepress-sidebar';
 import { VitePressSidebarOptions } from 'vitepress-sidebar/types';
+import MermaidExample from './mermaid';
 
 const vitepressConfig: UserConfig<DefaultTheme.Config> = {
 	title: 'whxnotes',
-	description: 'Notes taken by me',
+	description: 'Notes taken by whx',
+	appearance: 'force-auto',
 	themeConfig: {
 		nav: [{ text: 'Home', link: '/' }],
 		outline: {
@@ -31,6 +33,7 @@ const vitepressConfig: UserConfig<DefaultTheme.Config> = {
 				}
 			});
 			md.use(markdownItFootnotePlugin);
+			MermaidExample(md);
 		}
 	},
 	lang: 'zh'
