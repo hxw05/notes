@@ -37,3 +37,9 @@
 这样做主要是为了让模型确认一下可行性，与plan类似，但没有plan那么大。如果只是像普通聊天那样将一个只有短短几句话但涉及到非常多部分的重构任务，或者一个非常奇怪、难以正确实现的想法下达给模型，换来的很可能是长时间的思考、实现、调整以及token的浪费。
 
 这种情况往往发生在vibe coding的过程中。当然，如果足够不在意或者token足够充足，也不需要考虑这些。
+
+## 模型似乎知道自己获得了非常大的权限！
+
+在一次使用`claude --dangerously-skip-permissions`启动支持bypass模式的claude code进行编写的过程中，突然发现模型开始主动触及它自己的权限设置文件（`.claude/settings.local.json`）。
+
+![](./deepseek-x-claude-code-flashes/model-changes-its-own-permissions.png)
