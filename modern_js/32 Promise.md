@@ -18,7 +18,7 @@ then和catch用于注册promise的消费者函数。
 - then(onsuccess, onerror)可以接受至多两个参数，第一个参数是fulfill时的回调函数，传入一个参数value；第二个参数是reject时的回调函数，传入一个参数error。
 - catch(onerror)的效果相当于then(null, onerror)，表示当传递到这个位置时，只对其中的错误值进行处理，如果非错误值则透传。
 
-then和catch都会返回一个新的promise，关于其链式调用，见 [33 链式Promise](33%20%E9%93%BE%E5%BC%8FPromise%20315b76c581cf80ba8da9fe3b870e4e65.md) 。
+then和catch都会返回一个新的promise，关于其链式调用，见 [33 链式Promise](./33 链式Promise.md) 。
 
 ## finally
 

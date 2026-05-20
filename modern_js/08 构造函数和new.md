@@ -28,7 +28,7 @@ console.assert(user.name === 'Jack');
 
 new理论上可以调用任何函数，只是通常用来调用构造函数。
 
-### new function() { … }
+### `new function() { … }`
 
 通过new调用一个匿名函数，可以封装一个对象的复杂创建逻辑。
 
