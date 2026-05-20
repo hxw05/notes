@@ -4,7 +4,11 @@
 仅适用于默认主题
 :::
 
-VitePress并不具备官方的Mermaid渲染支持，但配置起来很简单，因为代码都是现成的：Mermaid的官方文档用的正是VitePress。参考这篇提问：https://github.com/orgs/mermaid-js/discussions/4511，最简单的方式不是去写一个插件，而是自己修改模板内容，步骤如下：
+VitePress并不具备官方的Mermaid渲染支持，但配置起来很简单，因为代码都是现成的：Mermaid的官方文档用的正是VitePress。参考这篇提问 <https://github.com/orgs/mermaid-js/discussions/4511>，最简单的方式不是去写一个插件，而是自己修改模板内容，步骤如下。
+
+:::tip
+以下代码大部分来自 https://github.com/mermaid-js/mermaid/tree/develop/packages/mermaid/src/docs/.vitepress
+:::
 
 ## Step 1
 
