@@ -7,6 +7,7 @@ import (
 	"os"
 	"path"
 	"strings"
+	"time"
 
 	stripmd "github.com/writeas/go-strip-markdown"
 )
@@ -105,6 +106,14 @@ func writeJSON(data any, fileName string) {
 
 const timeLayout = "2006-01-02 15:04:05"
 
+var beijingLoc = func() *time.Location {
+	loc, err := time.LoadLocation("Asia/Shanghai")
+	if err != nil {
+		return time.FixedZone("CST", 8*3600)
+	}
+	return loc
+}()
+
 func main() {
 	projects := projectDirectories()
 	projectStats := make([]ProjectStat, 0, len(projects))
@@ -122,15 +131,17 @@ func main() {
 			if err != nil {
 				fmt.Println(err)
 			} else {
+				bjTime := lastCommitTime.In(beijingLoc)
 				if projectStat.LastUpdated.IsZero() || projectStat.LastUpdated.Before(lastCommitTime) {
-					projectStat.LastUpdated = jsonTime{lastCommitTime, timeLayout}
+					projectStat.LastUpdated = jsonTime{bjTime, timeLayout}
 				}
 				if overallStats.LastUpdated.IsZero() || overallStats.LastUpdated.Before(lastCommitTime) {
-					overallStats.LastUpdated = jsonTime{lastCommitTime, timeLayout}
+					overallStats.LastUpdated = jsonTime{bjTime, timeLayout}
 				}
 			}
 
 			imageCount := countImageReferences(content)
+			content = stripFencedCodeBlocks(content)
 			content = stripBlockquotes(content)
 			stripped := stripmd.Strip(string(content))
 			counts := countContent(stripped)
