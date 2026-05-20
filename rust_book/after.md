@@ -42,7 +42,7 @@ mod back_of_house {
 }
 ```
 
-![](./rust-first-try-img/QQ20250905-000818.png "这是例子，还是干扰信息？")
+![](./QQ20250905-000818.png "这是例子，还是干扰信息？")
 
 在 [6.3 Concise Control Flow with if let and let else](https://doc.rust-lang.org/book/ch06-03-if-let.html) 中，作者举的例子多是基于美国本土的一些常识，例如美元和州。这为一些不了解相关知识的读者增添了不必要的麻烦。作者可能本身并没有考虑到这些。
 

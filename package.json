@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "gen-stats": "./.vitepress/stats_gen/whxnotes_stats_gen",
+    "gen-stats": "node -e \"const p=require('os').platform();const e=p==='linux'?'linux':p==='darwin'?'darwin':'darwin';require('child_process').execSync('./.vitepress/stats_gen/whxnotes_stats_gen_'+e,{stdio:'inherit'})\"",
     "docs:dev": "vitepress dev .",
     "docs:build": "npm run gen-stats && vitepress build .",
     "docs:preview": "vitepress preview ."
