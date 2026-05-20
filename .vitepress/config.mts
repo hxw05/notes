@@ -38,6 +38,24 @@ const vitepressConfig: UserConfig<DefaultTheme.Config> = {
 			});
 			md.use(markdownItFootnotePlugin);
 			MermaidExample(md);
+
+			// Fix linkify-it: strip CJK/fullwidth punctuation from the end of
+			// auto-linked URLs. linkify-it's path regex only excludes ASCII
+			// punctuation, so fullwidth equivalents (。, ！, ？, etc.) get
+			// included as part of the URL.
+			// See: https://github.com/markdown-it/linkify-it/issues/15
+			const cjkPunctRE = /[、。，．！？；：】」』》〉）｝]+$/;
+			const origLinkifyNormalize = md.linkify.normalize.bind(md.linkify);
+			md.linkify.normalize = (match) => {
+				origLinkifyNormalize(match);
+				const before = match.url.length;
+				match.url = match.url.replace(cjkPunctRE, '');
+				const diff = before - match.url.length;
+				if (diff > 0) {
+					match.text = match.text.slice(0, match.text.length - diff);
+					match.lastIndex -= diff;
+				}
+			};
 		}
 	},
 	lang: 'zh'
