@@ -11,6 +11,10 @@ const vitepressConfig: UserConfig<DefaultTheme.Config> = {
 	title: 'whxnotes',
 	description: 'Notes taken by whx',
 	appearance: 'force-auto',
+	head: [
+		['link', { rel: 'icon', href: '/w.png', media: '(prefers-color-scheme: light)', type: 'image/png' }],
+		['link', { rel: 'icon', href: '/w-invert.png', media: '(prefers-color-scheme: dark)', type: 'image/png' }]
+	],
 	themeConfig: {
 		nav: [{ text: 'Home', link: '/' }],
 		outline: {
