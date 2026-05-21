@@ -1,16 +1,44 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 	"path"
+	"slices"
 	"strings"
 	"time"
 
 	stripmd "github.com/writeas/go-strip-markdown"
 )
+
+var builtinIgnores = []string{"public", "node_modules"}
+
+func loadIgnores() []string {
+	ignores := make([]string, len(builtinIgnores))
+	copy(ignores, builtinIgnores)
+
+	f, err := os.Open(".statsignore")
+	if err != nil {
+		return ignores
+	}
+	defer f.Close()
+
+	scanner := bufio.NewScanner(f)
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		if line != "" && !strings.HasPrefix(line, "#") {
+			ignores = append(ignores, line)
+		}
+	}
+	return ignores
+}
+
+func isIgnored(name string, ignores []string) bool {
+	return slices.Contains(ignores, name)
+}
 
 func init() {
 	const projectRootEvidence = "package.json"
@@ -40,6 +68,7 @@ func projectDirectories() []string {
 	}
 
 	projectEntries := make([]string, 0, len(entries))
+	ignores := loadIgnores()
 
 	for _, entry := range entries {
 		if !entry.IsDir() {
@@ -48,7 +77,7 @@ func projectDirectories() []string {
 
 		name := entry.Name()
 
-		if name[0] == '.' || name == "node_modules" {
+		if name[0] == '.' || isIgnored(name, ignores) {
 			continue
 		}
 
