@@ -39,22 +39,25 @@ const vitepressConfig: UserConfig<DefaultTheme.Config> = {
 			md.use(markdownItFootnotePlugin);
 			MermaidExample(md);
 
-			// Fix linkify-it: strip CJK/fullwidth punctuation from the end of
-			// auto-linked URLs. linkify-it's path regex only excludes ASCII
-			// punctuation, so fullwidth equivalents (。, ！, ？, etc.) get
-			// included as part of the URL.
+			// Fix linkify-it: CJK/fullwidth punctuation is not excluded by
+			// linkify-it's path regex (only ASCII punctuation is), so it gets
+			// included as part of auto-linked URLs.
 			// See: https://github.com/markdown-it/linkify-it/issues/15
-			const cjkPunctRE = /[、。，．！？；：】」』》〉）｝]+$/;
+			//
+			// Truncate at the FIRST CJK punctuation character inside the URL.
+			// This handles both trailing punctuation (。, ！, ？) and the case
+			// where CJK punct sits between two adjacent URLs (e.g.
+			// `url1、url2`), which would otherwise be merged into one link.
+			const cjkPunctCharRE = /[、。，．！？；：【】「」『』《》（）]/;
 			const origLinkifyNormalize = md.linkify.normalize.bind(md.linkify);
 			md.linkify.normalize = (match) => {
 				origLinkifyNormalize(match);
-				const before = match.url.length;
-				match.url = match.url.replace(cjkPunctRE, '');
-				const diff = before - match.url.length;
-				if (diff > 0) {
-					match.text = match.text.slice(0, match.text.length - diff);
-					match.lastIndex -= diff;
-				}
+				const idx = match.url.search(cjkPunctCharRE);
+				if (idx === -1) return;
+				const removed = match.url.length - idx;
+				match.url = match.url.slice(0, idx);
+				match.text = match.text.slice(0, match.text.length - removed);
+				match.lastIndex -= removed;
 			};
 		}
 	},
