@@ -170,6 +170,7 @@ func main() {
 			}
 
 			imageCount := countImageReferences(content)
+			content = stripFrontmatter(content)
 			content = stripFencedCodeBlocks(content)
 			content = stripBlockquotes(content)
 			stripped := stripmd.Strip(string(content))
