@@ -1,4 +1,4 @@
-# 主题：具名返回值
+# 具名返回值的探索
 
 在阅读Ch3的过程中注意到`utf8.RuneCountInString`函数的源码（<https://cs.opensource.google/go/go/+/go1.26.2:src/unicode/utf8/utf8.go;l=447>）是
 
@@ -63,9 +63,7 @@ jsonHandler := func(data []byte) (result map[string]any, err error) {
 
 是啊，既然返回值又有名字，其顺序和个数又是确定的，直接一个`return`就能结束函数的执行并返回一个固定的返回值列表。
 
-> Effective Go 建议：在短函数中使用裸返回，在长函数中显式写出 `return val, err`
-
-真是奇妙，我居然遇到了一个完美贴合这种写法的需求例子。
+我居然遇到了一个完美贴合这种写法的需求例子。
 
 ### 潜在的坑
 

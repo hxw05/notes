@@ -1,4 +1,4 @@
-# 练习：Bit Vector
+# Bit Vector 的实现
 
 该练习基于Excercise 6.1-6.5
 

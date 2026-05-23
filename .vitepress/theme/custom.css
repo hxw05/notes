@@ -1,9 +1,9 @@
-@import './fonts/roboto-serif-v17-latin/font.css';
+@import './fonts/source-serif-4-v14-latin/font.css';
 @import './fonts/roboto-v51-latin/font.css';
 @import './fonts/noto-serif-sc-v35-chinese-simplified/font.css';
 
 html.font-serif {
-    --vp-font-family-base: 'Roboto Serif', 'Noto Serif SC', Georgia, 'Times New Roman', '宋体-简', '华文宋体', '宋体', '新宋体', 'SimSun', serif;
+    --vp-font-family-base: 'Source Serif 4', 'Noto Serif SC', Georgia, 'Times New Roman', '宋体-简', '华文宋体', '宋体', '新宋体', 'SimSun', serif;
 }
 
 :root {
@@ -19,8 +19,12 @@ html.font-serif {
     --vp-c-brand-darker: #000000;
     --vp-sidebar-bg-color: var(--vp-c-bg);
     --vp-font-family-base: 'Roboto', sans-serif;
-    --vp-font-family-mono: 'Menlo', 'Cascadia Code', 'Consolas', monospace;
+    --vp-font-family-mono: 'Cascadia Code', 'Cascadia Mono', 'Menlo', 'Consolas', monospace;
     /* --vp-custom-block-font-size: var(--vp-font-size); */
+}
+
+html.font-serif .vp-doc {
+    letter-spacing: .02em;
 }
 
 .dark {
@@ -38,7 +42,7 @@ html.font-serif {
 }
 
 .VPSidebarItem.is-active[class*="level-"] > .item .link .text {
-    text-decoration: underline
+    font-weight: bold;
 }
 
 .vp-doc .custom-block {
