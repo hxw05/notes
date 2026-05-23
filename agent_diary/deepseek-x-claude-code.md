@@ -1,4 +1,4 @@
-# 在 Claude Code 里使用 DeepSeek 的一些剪影
+# 用 Claude Code 搭配 DeepSeek 使用的一些记录
 
 此页面用来记录一些在Claude Code里使用DeepSeek过程中遇到的小细节。本文中的模型指的都是DeepSeek v4 Pro。
 
@@ -6,7 +6,7 @@
 
 只遇到过一次，应该是模型将宿主机和Guest弄混了。但为什么会出现在这里呢...
 
-![](deepseek-x-claude-code-flashes/deepseek-shows-though-chain-in-claude-code-recap.png)
+![](deepseek-x-claude-code/deepseek-shows-though-chain-in-claude-code-recap.png)
 
 ## 模型说理解应该是真的理解
 
@@ -42,13 +42,13 @@
 
 在一次使用`claude --dangerously-skip-permissions`启动支持bypass模式的claude code进行编写的过程中，突然发现模型开始主动触及它自己的权限设置文件（`.claude/settings.local.json`）。
 
-![](./deepseek-x-claude-code-flashes/model-changes-its-own-permissions.png)
+![](./deepseek-x-claude-code/model-changes-its-own-permissions.png)
 
 ## 文件不存在，但是要想Write得要先Read？
 
 一次不小心把窗口关掉后让模型继续，结果Write操作全部失败，原因是模型没有遵循Claude Code框架的规定：“always read before editing”。
 
-![](./deepseek-x-claude-code-flashes/edit-failure-due-to-not-reading.png)
+![](./deepseek-x-claude-code/edit-failure-due-to-not-reading.png)
 
 ## 提前做好远期规划或者稳定的技术选型很重要
 
@@ -62,11 +62,11 @@
 
 往往发生在vibe coding的过程中，如果对系统的架构不是很了解的话，很可能会提出一些模糊的请求。这些请求确实可以为模型指明方向和目的，但如果当前窗口中没有相关上下文，模型则需要经过explore才能得到开展实现的上下文，而explore的过程由于是多个指令并行进行，其非常消耗token（通常在一分钟内可以消耗上万token）。
 
-![](./deepseek-x-claude-code-flashes/unclear-prompts-cost-tokens.png)
+![](./deepseek-x-claude-code/unclear-prompts-cost-tokens.png)
 
-![](./deepseek-x-claude-code-flashes/explore.png)
+![](./deepseek-x-claude-code/explore.png)
 
-![](./deepseek-x-claude-code-flashes/explore2.png)
+![](./deepseek-x-claude-code/explore2.png)
 
 如果有节省token的需求，请尽量了解系统的基本结构，知道某些功能在哪个文件或者哪个目录即可；范围越宽泛，需要的探索就越多。
 
@@ -86,4 +86,4 @@
 
 尤其是在一些不做代码分隔的单文件上面。文件越长，越不分离，不同任务过程中读取到同一个文件的概率就越大。由于模型编辑必须遵循先读取后编辑的模式来做出准确的编辑，在这个过程中产生不一致的概率很大。解决方法是避免涉及同一个模块的请求并行，以及尽可能做符合软件工程要求的代码分隔来降低不同需求访问同样文件的概率。
 
-![](./deepseek-x-claude-code-flashes/conflict.png) *两个不同请求读取同一个文件，两边均发生了冲突，拖累了任务的执行*
+![](./deepseek-x-claude-code/conflict.png) *两个不同请求读取同一个文件，两边均发生了冲突，拖累了任务的执行*
