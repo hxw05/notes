@@ -5,8 +5,15 @@ import DefaultTheme from 'vitepress/theme';
 import { onMounted, ref } from 'vue';
 const { Layout } = DefaultTheme;
 
+let zoom;
+
 onContentUpdated(() => {
-    mediumZoom('img')
+    if (zoom) {
+        zoom.detach();
+        zoom.attach('img');
+    } else {
+        zoom = mediumZoom('img');
+    }
 });
 
 const { frontmatter } = useData()
