@@ -180,7 +180,6 @@ const renderChart = async () => {
 <style scoped>
 .mermaid-outer {
     position: relative;
-    min-height: 300px;
     overflow: auto;
 }
 
