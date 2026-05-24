@@ -1,7 +1,7 @@
 ---
 order: -1
 ---
-# 0. 前言
+# missing_2020
 
 这里记录的是我从2025年3月开始看的MIT课程《The Missing Semester》的笔记。这门课以YouTube视频的形式呈现。由于是边看边记的，可能会比较杂乱。我在CSDIY上听说了这门课。
 
