@@ -12,18 +12,19 @@ const MermaidExample = (md: MarkdownRenderer) => {
 		const language = token.info.trim();
 		if (language.startsWith('mermaid')) {
 			const key = index;
+			const enableZoom = language.startsWith('mermaidzoom');
 			return `
-      <Suspense> 
-      <template #default>
-      <Mermaid id="mermaid-${key}" :showCode="${
+	      <Suspense>
+	      <template #default>
+	      <Mermaid id="mermaid-${key}" :showCode="${
 			language === 'mermaid-example'
-		}" graph="${encodeURIComponent(token.content)}"></Mermaid>
-      </template>
-        <!-- loading state via #fallback slot -->
-        <template #fallback>
-          Loading...
-        </template>
-      </Suspense>
+		}" :enableZoom="${enableZoom}" graph="${encodeURIComponent(token.content)}"></Mermaid>
+	      </template>
+	        <!-- loading state via #fallback slot -->
+	        <template #fallback>
+	          Loading...
+	        </template>
+	      </Suspense>
 `;
 		} else if (language === 'warning') {
 			return `<div class="warning custom-block"><p class="custom-block-title">WARNING</p><p>${token.content}}</p></div>`;

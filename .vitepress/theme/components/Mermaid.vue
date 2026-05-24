@@ -11,7 +11,19 @@
             </div>
         </div>
     </div>
-    <div v-html="svg"></div>
+    <div
+        ref="mermaidOuter"
+        :class="['mermaid-outer', { 'mermaid-zoomable': enableZoom }]"
+        @wheel="onWheel"
+        @mousedown="enableZoom && onMouseDown($event)"
+        @dblclick="enableZoom && resetTransform"
+    >
+        <div
+            class="mermaid-inner"
+            :style="{ transform: enableZoom ? `translate(${tx}px, ${ty}px) scale(${scale})` : undefined }"
+            v-html="svg"
+        ></div>
+    </div>
 </template>
 
 <script setup>
@@ -31,6 +43,10 @@ const props = defineProps({
         type: Boolean,
         default: true,
     },
+    enableZoom: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const svg = ref('');
@@ -42,8 +58,64 @@ const contentEditable = ref(isFirefox ? 'true' : 'plaintext-only');
 
 let mut = null;
 
+const MIN_SCALE = 0.25;
+const MAX_SCALE = 5;
+const scale = ref(1);
+const tx = ref(0);
+const ty = ref(0);
+const mermaidOuter = ref(null);
+
+let dragging = false;
+let dragStartX = 0;
+let dragStartY = 0;
+let dragStartTx = 0;
+let dragStartTy = 0;
+
 const updateCode = (event) => {
     code.value = event.target.innerText;
+};
+
+const clampScale = (v) => Math.max(MIN_SCALE, Math.min(MAX_SCALE, v));
+
+const onWheel = (e) => {
+    if (!props.enableZoom) return;
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? -0.1 : 0.1;
+    const newScale = clampScale(scale.value + delta);
+
+    const rect = mermaidOuter.value.getBoundingClientRect();
+    const cx = e.clientX - rect.left;
+    const cy = e.clientY - rect.top;
+
+    tx.value = cx - (cx - tx.value) * (newScale / scale.value);
+    ty.value = cy - (cy - ty.value) * (newScale / scale.value);
+    scale.value = newScale;
+};
+
+const onMouseDown = (e) => {
+    if (e.button !== 0) return;
+    dragging = true;
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+    dragStartTx = tx.value;
+    dragStartTy = ty.value;
+    e.preventDefault();
+};
+
+const onMouseMove = (e) => {
+    if (!dragging) return;
+    tx.value = dragStartTx + (e.clientX - dragStartX);
+    ty.value = dragStartTy + (e.clientY - dragStartY);
+};
+
+const onMouseUp = () => {
+    dragging = false;
+};
+
+const resetTransform = () => {
+    scale.value = 1;
+    tx.value = 0;
+    ty.value = 0;
 };
 
 onMounted(async () => {
@@ -51,15 +123,11 @@ onMounted(async () => {
     mut.observe(document.documentElement, { attributes: true });
 
     if (editableContent.value) {
-        // Set the initial value of the contenteditable element
-        // We cannot bind using `{{ code }}` because it will rerender the whole component
-        // when the value changes, shifting the cursor when enter is used
         editableContent.value.textContent = code.value;
     }
 
     await renderChart();
 
-    //refresh images on first render
     const hasImages = /<img([\w\W]+?)>/.exec(code.value)?.length > 0;
     if (hasImages)
         setTimeout(() => {
@@ -80,9 +148,20 @@ onMounted(async () => {
                 });
             }
         }, 100);
+
+    if (props.enableZoom) {
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
+    }
 });
 
-onUnmounted(() => mut.disconnect());
+onUnmounted(() => {
+    mut.disconnect();
+    if (props.enableZoom) {
+        window.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseup', onMouseUp);
+    }
+});
 
 const renderChart = async () => {
     console.log('rendering chart' + props.id + code.value);
@@ -93,45 +172,30 @@ const renderChart = async () => {
         theme: hasDarkClass ? 'dark' : 'default',
     };
     let svgCode = await render(props.id, code.value, mermaidConfig);
-    // This is a hack to force v-html to re-render, otherwise the diagram disappears
-    // when **switching themes** or **reloading the page**.
-    // The cause is that the diagram is deleted during rendering (out of Vue's knowledge).
-    // Because svgCode does NOT change, v-html does not re-render.
-    // This is not required for all diagrams, but it is required for c4c, mindmap and zenuml.
     const salt = Math.random().toString(36).substring(7);
     svg.value = `${svgCode} <span style="display: none">${salt}</span>`;
 };
 </script>
 
-<style>
-.editable-code:focus {
-    outline: none;
-    /* Removes the default focus indicator */
+<style scoped>
+.mermaid-outer {
+    position: relative;
+    min-height: 300px;
+    overflow: auto;
 }
 
-.buttons-container {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: 1;
-    padding: 0.5rem;
-    display: flex;
-    gap: 0.5rem;
+.mermaid-zoomable {
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
 }
 
-.buttons-container>span {
-    cursor: default;
-    opacity: 0.5;
-    font-size: 0.8rem;
+.mermaid-zoomable:active {
+    cursor: grabbing;
 }
 
-.buttons-container>button {
-    color: #007bffbf;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.buttons-container>button:hover {
-    color: #007bff;
+.mermaid-inner {
+    display: inline-block;
+    min-width: 100%;
 }
 </style>
