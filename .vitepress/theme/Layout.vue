@@ -41,10 +41,10 @@ onMounted(() => {
             </button>
         </template>
         <template #doc-before>
-            <div class="doc-before">
+            <div class="doc-before" v-if="frontmatter.date || frontmatter.origin?.link">
                 <div v-if="frontmatter.date" class="vp-doc-date">
                     发布于 {{ frontmatter.date }}
-                </div> ·
+                </div>
                 <a target="_blank" :href="frontmatter.origin.link" v-if="frontmatter.origin?.link">
                     查看原文
                 </a>
@@ -61,12 +61,16 @@ onMounted(() => {
     display: flex;
     align-items: center;
     margin-bottom: 8px;
-    gap: 4px;
     color: var(--vp-c-text-2);
 }
 
 .doc-before a {
     text-decoration: underline;
+}
+
+.doc-before>*:not(:last-child)::after {
+    content: '·';
+    margin: 0 8px;
 }
 
 .medium-zoom-overlay {
