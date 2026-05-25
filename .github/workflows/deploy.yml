@@ -29,6 +29,10 @@ jobs:
 
       - run: npm ci
 
+      - run: npm run gen-stats-linux
+
+      - run: npm run gen-meta
+
       - run: npm run docs:build
 
       - uses: actions/configure-pages@v4

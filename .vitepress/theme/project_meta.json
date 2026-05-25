@@ -1,0 +1,47 @@
+[
+  {
+    "name": "agent_diary",
+    "link": null,
+    "descriptionHtml": "Agent 工具的使用流水账"
+  },
+  {
+    "name": "agent_readings",
+    "link": null,
+    "descriptionHtml": "AI 相关阅读记录"
+  },
+  {
+    "name": "frontend",
+    "link": null,
+    "descriptionHtml": "前端开发的一些记录"
+  },
+  {
+    "name": "gopl",
+    "link": null,
+    "descriptionHtml": "<a href=\"https://www.gopl.io/\">The Go Programming Language 英文版</a>书籍阅读记录 &amp; 一些 Go 语言学习记录"
+  },
+  {
+    "name": "how_to",
+    "link": null,
+    "descriptionHtml": "步骤记录"
+  },
+  {
+    "name": "mind_dumps",
+    "link": "/mind_dumps/",
+    "descriptionHtml": "个人日常想法记录"
+  },
+  {
+    "name": "missing_2020",
+    "link": "/missing_2020/",
+    "descriptionHtml": "MIT 课程 <a href=\"https://missing.csail.mit.edu/\">The Missing Semester of Your CS Education</a>（2020 年版）学习记录"
+  },
+  {
+    "name": "modern_js",
+    "link": null,
+    "descriptionHtml": "<a href=\"https://javascript.info/\">The Modern JavaScript Tutorial</a> 学习记录"
+  },
+  {
+    "name": "rust_book",
+    "link": null,
+    "descriptionHtml": "<a href=\"https://kaisery.github.io/trpl-zh-cn/\">Rust 程序设计语言（KaiserY 翻译版）</a> 阅读记录"
+  }
+]

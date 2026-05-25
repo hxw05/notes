@@ -94,7 +94,7 @@ function buildSection(dirPath: string, dirName: string, rootDir: string): Sideba
     if (typeof fm.date === 'string') info.date = fm.date;
 
     if (entry.name === 'index.md') {
-      indexLink = link;
+      indexLink = link.replace(/\/index$/, '/');
     } else {
       files.push(info);
     }

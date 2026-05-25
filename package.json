@@ -1,8 +1,11 @@
 {
   "scripts": {
-    "gen-stats": "node -e \"const p=require('os').platform();const e=p==='linux'?'linux':p==='darwin'?'darwin':'darwin';require('child_process').execSync('./.vitepress/stats_gen/whxnotes_stats_gen_'+e,{stdio:'inherit'})\"",
+    "gen-stats-darwin": ".vitepress/stats_gen/whxnotes_stats_gen_darwin",
+    "gen-stats-linux": ".vitepress/stats_gen/whxnotes_stats_gen_linux",
+    "gen-meta": "node .vitepress/gen_project_meta.mjs",
+    "gen-stats": "npm run gen-stats-$(node -e \"process.stdout.write(require('os').platform())\") && npm run gen-meta",
     "docs:dev": "vitepress dev .",
-    "docs:build": "npm run gen-stats && vitepress build .",
+    "docs:build": "vitepress build .",
     "docs:preview": "vitepress preview ."
   },
   "dependencies": {

@@ -381,7 +381,7 @@ Begin your response with an opening brace: {
 
 ### 长内容相关考虑
 
-提示词工程往往倾向于向提示词中引入更多信息，无论是示例内容，还是多轮提示词，还是详细的提示词等，都会向上下文中引入信息，添加上下文负担（context overhead）并且消耗实在的token。这个时候就需要考虑对上下文进行管理。对上下文的管理也是一项专门的技能，更详细的牵涉到[Context Engineering](../anthropic_engineering/effective-ctx-engineering.md)。
+提示词工程往往倾向于向提示词中引入更多信息，无论是示例内容，还是多轮提示词，还是详细的提示词等，都会向上下文中引入信息，添加上下文负担（context overhead）并且消耗实在的token。这个时候就需要考虑对上下文进行管理。对上下文的管理也是一项专门的技能，更详细的牵涉到 [Context Engineering](./effective-ctx-engineering.md)。
 
 为了避免无限制地引入信息，我们应该记住只有在这些方法真的有作用且适合这种场景时，才应该去使用它。
 
