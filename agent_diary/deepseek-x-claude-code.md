@@ -1,10 +1,10 @@
-# 用 Claude Code 搭配 DeepSeek 使用的一些记录
+# CC+DS 杂项使用记录
 
 此页面用来记录一些在Claude Code里使用DeepSeek过程中遇到的小细节。本文中的模型指的都是DeepSeek v4 Pro。
 
-## 在recap里面展示残存的思维链
+## recap 罕见地显示了残存的思维链
 
-只遇到过一次，应该是模型将宿主机和Guest弄混了。但为什么会出现在这里呢...
+只遇到过一次，其内容大概表明模型将宿主机和Guest弄混了，并且认为自己要接下来执行任务。但为什么会出现在这里呢...
 
 ![](deepseek-x-claude-code/deepseek-shows-though-chain-in-claude-code-recap.png)
 

@@ -1,7 +1,7 @@
 ---
 date: 2026/05/10
 ---
-# DeepSeek 似乎不会写 Liquid Glass UI
+# DS 不会写液态玻璃 UI
 
 尝试了一下用DeepSeek v4 Pro+Claude Code来vibe一个简单的CRUD客户端项目，发现它可以说对iOS 26的液态玻璃风格和组件是一窍不通。
 - 做出来的Toolbar一点也不像iOS 26里的设计，但它却在iOS 26上运行，所以最后看上去很怪。

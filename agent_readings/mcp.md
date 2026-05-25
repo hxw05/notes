@@ -7,7 +7,7 @@ origin:
   subtitle: Connect AI assistants to your tools without custom integrations using Model Context Protocol.
 ---
 
-# 何为MCP？将AI与你的世界相连
+# 何为 MCP？
 
 > AI models are only as good as the context provided to them.
 

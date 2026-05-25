@@ -5,7 +5,7 @@ origin:
   link: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
   date: 2025/09/29
 ---
-# 高效的AI Agent上下文工程
+# 高效的 AI Agent 上下文工程
 
 几年过去了，prompt engineering已经不再是讨论的重点，取而代之成为重点的是context engineering。通过大模型去构建应用的重要问题，从该如何正确地在系统提示词里遣词造句，转向了该如何正确组织上下文，从而让AI能够给出想要的结果。
 

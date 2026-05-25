@@ -23,7 +23,7 @@ const isSerif = ref(false)
 function toggleFont() {
     isSerif.value = !isSerif.value
     document.documentElement.classList.toggle('font-serif', isSerif.value)
-    try { localStorage.setItem('font-serif', isSerif.value ? '1' : '0') } catch {}
+    try { localStorage.setItem('font-serif', isSerif.value ? '1' : '0') } catch { }
 }
 
 onMounted(() => {
@@ -41,8 +41,13 @@ onMounted(() => {
             </button>
         </template>
         <template #doc-before>
-            <div v-if="frontmatter.date" class="vp-doc-date">
-                发布于 {{ frontmatter.date }}
+            <div class="doc-before">
+                <div v-if="frontmatter.date" class="vp-doc-date">
+                    发布于 {{ frontmatter.date }}
+                </div> ·
+                <a target="_blank" :href="frontmatter.origin.link" v-if="frontmatter.origin?.link">
+                    查看原文
+                </a>
             </div>
             <!-- <h3 v-if="frontmatter.origin?.title" class="vp-doc-pre-title">
                 {{ frontmatter.origin.title }}
@@ -52,14 +57,16 @@ onMounted(() => {
 </template>
 
 <style lang="css">
-.vp-doc-date {
-    color: var(--vp-c-text-2);
+.doc-before {
+    display: flex;
+    align-items: center;
     margin-bottom: 8px;
+    gap: 4px;
+    color: var(--vp-c-text-2);
 }
 
-.vp-doc-pre-title {
-    margin-bottom: 3px;
-    font-size: 110%;
+.doc-before a {
+    text-decoration: underline;
 }
 
 .medium-zoom-overlay {

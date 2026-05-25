@@ -5,9 +5,7 @@
 ## Projects
 
 - agent_diary - Agent 工具的使用流水账
-- anthropic_blogs — [Claude Blog](https://claude.com/blog) 相关博文阅读记录
-- anthropic_engineering — [Anthropic Engineering](https://anthropic.com/engineering) 相关文章阅读记录
-- books — 书籍阅读记录
+- agent_readings — AI 相关阅读记录
 - gopl — [The Go Programming Language 英文版](https://www.gopl.io/)书籍阅读记录 & 一些Go语言学习记录
 - how_to - 步骤记录
 - mind_dumps — 个人日常想法记录
