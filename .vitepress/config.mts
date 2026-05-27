@@ -20,7 +20,7 @@ const vitepressConfig: UserConfig<DefaultTheme.Config> = {
 		outline: {
 			label: '目录',
 			level: [2, 3]
-		}
+		},
 	},
 	markdown: {
 		config: md => {

@@ -103,6 +103,7 @@ html.font-serif .vp-doc {
 
     .VPNavBar.has-sidebar .container>.content {
         padding-left: var(--vp-sidebar-width) !important;
+        padding-right: 32px !important;
     }
 
     .VPNavBar.has-sidebar .divider {

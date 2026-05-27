@@ -37,10 +37,19 @@ function parseFrontmatter(content: string): Record<string, unknown> {
   return data;
 }
 
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/~~([^~]+)~~/g, '$1')
+    .replace(/__([^_]+)__/g, '$1');
+}
+
 function extractTitle(content: string): string | null {
   const body = content.replace(/^---\n[\s\S]*?\n---\n?/, '');
   const match = body.match(/^#\s+(.+)$/m);
-  return match ? match[1].trim() : null;
+  return match ? stripMarkdown(match[1].trim()) : null;
 }
 
 function sortFiles(files: FileInfo[]): FileInfo[] {
