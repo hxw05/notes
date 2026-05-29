@@ -11,7 +11,7 @@ date: 2026/05/10
 
 我反复强调要使用Liquid Glass中的common pratice，换来的是更加奇怪的实现，越来越差，这更说明DeepSeek是没有iOS 26 Swift UI的相关编程储备的。心疼我的Token`(╯‵□′)╯︵┻━┻`
 
-没办法，毕竟Swift面对的是一个封闭（却丰富）的生态。
+没办法，毕竟Swift面对的是一个封闭的生态。
 
 ## 尝试添加 Skills/插件
 
