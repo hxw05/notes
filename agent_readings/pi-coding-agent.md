@@ -39,7 +39,7 @@ pi是默认绕过权限的，这可能在安全性角度来考虑很令人惊讶
 
 > In my experience, to-do lists generally confuse models more than they help. They add state that the model has to track and update, which introduces more opportunities for things to go wrong.
 
-就我个人的体验来看，TODO没有引入很显然的问题，在一些较为复杂的场景，确实可以为模型提供任务的outline（例如列出5~8个TODO，一个一个完成）。但我不是很明白TODO之间是否有顺序，以及为什么模型有的时候会仅列出一个TODO。
+就我个人的体验来看，TODO没有引入很显然的问题，在一些较为复杂的场景，确实可以为模型提供任务的outline（例如列出5~8个TODO，一个一个完成）。但我不是很明白为什么模型有的时候会仅列出一个TODO。
 
 ### Plan mode
 
