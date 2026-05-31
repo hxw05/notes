@@ -1,6 +1,7 @@
 ---
 date: 2026/05/28
 origin:
+    author: Anthropic
     link: https://www.anthropic.com/engineering/building-effective-agents
     date: 2024/12/19
 ---

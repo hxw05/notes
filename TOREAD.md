@@ -5,7 +5,7 @@ hidden: true
 
 ## 2026.05
 
-- [ ] https://mariozechner.at/posts/2025-11-30-pi-coding-agent/
+- [x] https://mariozechner.at/posts/2025-11-30-pi-coding-agent/
 - [ ] https://simonwillison.net/2023/Apr/25/dual-llm-pattern/
 
 - [ ] https://www.aihero.dev/tips-for-ai-coding-with-ralph-wiggum

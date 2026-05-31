@@ -1,10 +1,11 @@
 ---
 date: 2026/04/23
 origin:
+  author: Anthropic
   link: https://claude.com/blog/best-practices-for-prompt-engineering
   title: Best practices for prompt engineering
   subtitle: Get better AI results with prompt engineering techniques from the team behind Claude.
-  date: 2025-11-10
+  date: 2025/11/10
 ---
 # 提示词工程最佳实践
 

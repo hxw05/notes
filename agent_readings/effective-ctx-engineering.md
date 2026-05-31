@@ -1,6 +1,7 @@
 ---
 date: 2026/04/25
 origin:
+  author: Anthropic
   title: Effective context engineering for AI agents
   link: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
   date: 2025/09/29

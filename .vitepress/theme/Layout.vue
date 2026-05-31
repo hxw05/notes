@@ -42,9 +42,11 @@ onMounted(() => {
         </template>
         <template #doc-before>
             <div class="doc-before" v-if="frontmatter.date || frontmatter.origin?.link">
-                <div v-if="frontmatter.date" class="vp-doc-date">
-                    发布于 {{ frontmatter.date }}
+                <div v-if="frontmatter.date">
+                    笔记发布于 {{ frontmatter.date }}
                 </div>
+                <div v-if="frontmatter.origin.date">原文发布于 {{ frontmatter.origin.date }}</div>
+                <div v-if="frontmatter.origin.author">原作者 {{ frontmatter.origin.author }}</div>
                 <a target="_blank" :href="frontmatter.origin.link" v-if="frontmatter.origin?.link">
                     查看原文
                 </a>
