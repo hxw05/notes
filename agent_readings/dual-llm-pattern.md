@@ -11,6 +11,8 @@ agent总是要与外界交互：读取文件、执行指令、编辑或删除文
 
 :::tip 注入攻击
 提示词注入是一个来自SQL注入（SQL injection）的类比词，后者是在后端开发中常见的注入攻击。两类攻击的共同点都是信任了不可信的内容（用户输入）或没有专门的过滤机制，导致外部因素可以轻易地与内部系统进行交互。
+
+提示词注入现象存在中性的场景，例如来自模型的预置上下文。当你在模型的预置上下文（CLAUDE.md/AGENTS.md/CODEBUDDY.md/...）中添加了一些让模型“始终遵循”的事情并划定范围，一些模型可能在工作的过程中会将这些事情与其实际工作混淆。归根结底这是一个上下文形式所导致的问题，即[这里](https://simonwillison.net/2025/Apr/11/camel/#camels-have-two-humps:~:text=The%20original%20sin%20of%20LLMs%20that%20makes%20them%20vulnerable%20to%20this%20is%20when%20trusted%20prompts%20from%20the%20user%20and%20untrusted%20text%20from%20emails/web%20pages/etc%20are%20concatenated%20together%20into%20the%20same%20token%20stream.)提到的一种原罪。
 :::
 
 提示词注入并不是篡改作为用户的我们给模型的提示词——在这个环节进行攻击显得有些过于明显且容易防范。提示词注入往往都是发生在模型对外部环境的读取、探索和理解的过程中。
