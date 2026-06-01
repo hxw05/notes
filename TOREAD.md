@@ -3,21 +3,24 @@ hidden: true
 ---
 # TOREAD
 
-## 2026.05
+## 2026.06
 
-- [x] https://mariozechner.at/posts/2025-11-30-pi-coding-agent/
-- [ ] https://simonwillison.net/2023/Apr/25/dual-llm-pattern/
+- [ ] https://www.trychroma.com/research/context-rot
 
 - [ ] https://www.aihero.dev/tips-for-ai-coding-with-ralph-wiggum
 - [ ] https://www.cnblogs.com/alisystemsoftware/p/19540015
 
-- [ ] https://www.anthropic.com/engineering/building-effective-agents
 - [ ] https://www.anthropic.com/engineering/multi-agent-research-system
 - [ ] https://simonwillison.net/2025/Sep/18/agents/
-- [ ] https://www.trychroma.com/research/context-rot
 - [ ] https://huggingface.co/blog/Esmail-AGumaan/attention-is-all-you-need
 - [ ] https://www.anthropic.com/engineering/writing-tools-for-agents
 - [ ] https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
+
+## 2026.05
+
+- [x] https://mariozechner.at/posts/2025-11-30-pi-coding-agent/ 2026.05.29
+- [x] https://simonwillison.net/2023/Apr/25/dual-llm-pattern/ 2026.05.31
+- [x] https://www.anthropic.com/engineering/building-effective-agents 2026.05.28
 
 ## 2026.04
 
