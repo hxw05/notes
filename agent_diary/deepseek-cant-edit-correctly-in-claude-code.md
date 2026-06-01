@@ -1,7 +1,7 @@
 ---
 date: 2026/05/11
 ---
-# DS 经常编辑失败的问题 & Workaround
+# DeepSeek 经常编辑失败的问题 & Workaround
 
 这个问题我在小红书上面问了一圈，有两个不同的人告诉我这是Claude Code版本导致的，说Claude Code正在重构，升级到某个版本就可以了。然而并没有。升级到他们说的版本问题依旧。总之，Claude Code不是为DeepSeek设计的，反过来也成立，所以也没啥好抱怨的，能用就行...
 

@@ -25,6 +25,11 @@
     "descriptionHtml": "步骤记录"
   },
   {
+    "name": "media",
+    "link": null,
+    "descriptionHtml": "影视、书籍或游戏的简短记录"
+  },
+  {
     "name": "mind_dumps",
     "link": "/mind_dumps/",
     "descriptionHtml": "个人日常想法记录"
