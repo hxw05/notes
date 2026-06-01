@@ -41,15 +41,17 @@ onMounted(() => {
             </button>
         </template>
         <template #doc-before>
-            <div class="doc-before" v-if="frontmatter.date || frontmatter.origin?.link">
+            <div class="doc-before" v-if="frontmatter">
                 <div v-if="frontmatter.date">
                     笔记发布于 {{ frontmatter.date }}
                 </div>
-                <div v-if="frontmatter.origin.date">原文发布于 {{ frontmatter.origin.date }}</div>
-                <div v-if="frontmatter.origin.author">原作者 {{ frontmatter.origin.author }}</div>
-                <a target="_blank" :href="frontmatter.origin.link" v-if="frontmatter.origin?.link">
-                    查看原文
-                </a>
+                <template v-if="frontmatter.origin">
+                    <div v-if="frontmatter.origin.date">原文发布于 {{ frontmatter.origin.date }}</div>
+                    <div v-if="frontmatter.origin.author">原作者 {{ frontmatter.origin.author }}</div>
+                    <a target="_blank" :href="frontmatter.origin.link" v-if="frontmatter.origin?.link">
+                        查看原文
+                    </a>
+                </template>
             </div>
             <!-- <h3 v-if="frontmatter.origin?.title" class="vp-doc-pre-title">
                 {{ frontmatter.origin.title }}
