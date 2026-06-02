@@ -106,7 +106,7 @@ pi的文档放在 `node_modules/@earendil-works/pi-coding-agent/{docs,examples}/
 
 由agent自身负责维护CUSTOM.md以供将来读取，同时在`~/.pi/agent`目录下新建了一个git仓库用来跟踪将来的定制活动，agent每一次定制完毕后都会提交。这个git仓库如果没有多端同步或分享需求不需要有remote，只在本地做追踪已经够了。
 
-![](./pi-agent-1/custom.md.pngo) _由agent维护的CUSTOM.md定制索引内容_
+![](./pi-agent-1/custom.md.png) _由agent维护的CUSTOM.md定制索引内容_
 
 ![](./pi-agent-1/custom-git.png) _使用git管理定制内容，由agent每次修改后自动提交_
 
