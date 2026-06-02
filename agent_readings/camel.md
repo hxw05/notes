@@ -8,6 +8,10 @@ origin:
 
 # 一种减弱提示词注入攻击的新方向 CaMeL
 
+:::tip
+本文的前置文章为[防止提示词注入的双模型设计](./dual-llm-pattern.md)
+:::
+
 > The original sin of LLMs that makes them vulnerable to this is when trusted prompts from the user and untrusted text from emails/web pages/etc are concatenated together into the same token stream.
 
 CApabilities for MachinE Learning（CaMeL，强行缩写成这样或许是想[贴近骆驼有两个驼峰的样子](https://simonwillison.net/2025/Apr/11/camel/#camels-have-two-humps)...）是论文[Defeating Prompt Injections by Design](https://arxiv.org/abs/2503.18813)中提出的一种对抗提示词注入攻击的方法。这种方法相较于其它尝试解决提示词注入的方法，没有引入额外的AI层，而是采用了一种向语法树元素添加标签并将其与access control相关联的策略。这种看上去有些“经典”的实现摆脱了LLM天生的概率性问题。
