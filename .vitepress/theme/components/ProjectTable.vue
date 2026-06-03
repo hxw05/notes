@@ -9,7 +9,7 @@ const keyNames = {
     'imageCount': '图片数',
     'charCountChinese': '中文字数',
     'charCountTotal': '字词数',
-    'lastUpdated': '最近更新于'
+    'lastUpdated': '最近更新于（UTC+8）'
 }
 </script>
 

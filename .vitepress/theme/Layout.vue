@@ -2,7 +2,7 @@
 import mediumZoom from 'medium-zoom';
 import { onContentUpdated, useData } from 'vitepress';
 import DefaultTheme from 'vitepress/theme';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 const { Layout } = DefaultTheme;
 
 let zoom;
@@ -31,6 +31,22 @@ onMounted(() => {
     isSerif.value = saved
     document.documentElement.classList.toggle('font-serif', saved)
 })
+
+const prefixText = computed(() => {
+    let res = [`本文发布于 ${frontmatter.value.date}`];
+    if (frontmatter.value.origin) {
+        if (frontmatter.value.origin.date) {
+            res.push(`原文发布于 ${frontmatter.value.origin.date}`)
+        }
+        if (frontmatter.value.origin.author) {
+            res.push(`原作者 ${frontmatter.value.origin.author}`)
+        }
+        if (frontmatter.value.origin.link) {
+            res.push(`<a href="${frontmatter.value.origin.link}" target="_blank">查看原文</a>`)
+        }
+    }
+    return res.join('，');
+})
 </script>
 
 <template>
@@ -42,16 +58,7 @@ onMounted(() => {
         </template>
         <template #doc-before>
             <div class="doc-before" v-if="frontmatter">
-                <div v-if="frontmatter.date">
-                    笔记发布于 {{ frontmatter.date }}
-                </div>
-                <template v-if="frontmatter.origin">
-                    <div v-if="frontmatter.origin.date">原文发布于 {{ frontmatter.origin.date }}</div>
-                    <div v-if="frontmatter.origin.author">原作者 {{ frontmatter.origin.author }}</div>
-                    <a target="_blank" :href="frontmatter.origin.link" v-if="frontmatter.origin?.link">
-                        查看原文
-                    </a>
-                </template>
+                <p v-html="prefixText"></p>
             </div>
             <!-- <h3 v-if="frontmatter.origin?.title" class="vp-doc-pre-title">
                 {{ frontmatter.origin.title }}
