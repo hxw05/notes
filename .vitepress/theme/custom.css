@@ -61,7 +61,8 @@ html.font-serif .vp-doc {
 }
 
 .vp-doc img+em,
-.vp-doc .mermaid-outer+p em {
+.vp-doc .mermaid-outer+p em,
+.vp-doc div[class*="language-"]+p em {
     text-align: center;
     display: block;
     margin: 4px auto;
