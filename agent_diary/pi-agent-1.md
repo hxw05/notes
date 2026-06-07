@@ -3,7 +3,7 @@ date: 2026/06/02
 ---
 # Pi Agent 的一些初步定制
 
-Pi Agent是一个极简的coding agent，默认只提供了四种工具（但大多数场景下已经够用），工具定义和系统提示词加起来不到1000 tokens。Pi Agent主张用agent来定制agent，且只有在真的需要用到的时候引入额外的复杂度。关于Pi Agent的更多设计，可以见[这篇文章](../agent_readings/pi-coding-agent.md)或者[作者的博客文章](https://mariozechner.at/posts/2025-11-30-pi-coding-agent/)。
+Pi Agent是一个极简的coding agent，默认只提供了四种工具（但大多数场景下已经够用），工具定义和系统提示词加起来不到1000 tokens。Pi Agent主张用agent来定制agent，且只有在真的需要用到的时候引入额外的复杂度。关于Pi Agent的更多设计，可以见[这篇文章](../ai_readings/pi-coding-agent.md)或者[作者的博客文章](https://mariozechner.at/posts/2025-11-30-pi-coding-agent/)。
 
 本文记录了刚刚拿到pi agent之后所做的一些定制操作的思路。
 
