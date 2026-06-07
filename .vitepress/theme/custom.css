@@ -91,6 +91,10 @@ html.font-serif .vp-doc {
     color: var(--vp-c-brand-1);
 }
 
+.vp-doc .custom-block a:hover {
+    opacity: 1;
+}
+
 @media (min-width: 1440px) {
     .VPSidebar {
         padding-left: 32px !important;

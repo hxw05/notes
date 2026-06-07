@@ -57,7 +57,7 @@ const prefixText = computed(() => {
             </button>
         </template>
         <template #doc-before>
-            <div class="doc-before" v-if="frontmatter">
+            <div class="doc-before" v-if="Object.values(frontmatter).length">
                 <p v-html="prefixText"></p>
             </div>
             <!-- <h3 v-if="frontmatter.origin?.title" class="vp-doc-pre-title">
