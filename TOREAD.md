@@ -5,7 +5,6 @@ hidden: true
 
 ## 2026.06
 
-- [ ] https://www.trychroma.com/research/context-rot
 - [ ] https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
 
 - [ ] https://www.aihero.dev/tips-for-ai-coding-with-ralph-wiggum
@@ -15,6 +14,8 @@ hidden: true
 - [ ] https://simonwillison.net/2025/Sep/18/agents/
 - [ ] https://huggingface.co/blog/Esmail-AGumaan/attention-is-all-you-need
 - [ ] https://www.anthropic.com/engineering/writing-tools-for-agents
+
+- [x] https://www.trychroma.com/research/context-rot 2026.06.06
 
 ## 2026.05
 
