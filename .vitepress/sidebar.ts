@@ -52,13 +52,16 @@ function extractTitle(content: string): string | null {
   return match ? stripMarkdown(match[1].trim()) : null;
 }
 
+const naturalCollator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
+const naturalCompare = (a: string, b: string) => naturalCollator.compare(a, b);
+
 function sortFiles(files: FileInfo[]): FileInfo[] {
   return [...files].sort((a, b) => {
     const aHasOrder = a.order !== undefined;
     const bHasOrder = b.order !== undefined;
     if (aHasOrder && bHasOrder) {
       if (a.order !== b.order) return a.order! - b.order!;
-      return a.name.localeCompare(b.name);
+      return naturalCompare(a.name, b.name);
     }
     if (aHasOrder) return -1;
     if (bHasOrder) return 1;
@@ -68,12 +71,12 @@ function sortFiles(files: FileInfo[]): FileInfo[] {
     if (aHasDate && bHasDate) {
       const cmp = a.date!.localeCompare(b.date!);
       if (cmp !== 0) return cmp;
-      return a.name.localeCompare(b.name);
+      return naturalCompare(a.name, b.name);
     }
     if (aHasDate) return -1;
     if (bHasDate) return 1;
 
-    return a.name.localeCompare(b.name);
+    return naturalCompare(a.name, b.name);
   });
 }
 
@@ -141,6 +144,6 @@ export function generateSidebar(rootDir?: string): SidebarItem[] {
     if (section) sections.push(section);
   }
 
-  sections.sort((a, b) => a.text.localeCompare(b.text));
+  sections.sort((a, b) => naturalCompare(a.text, b.text));
   return sections;
 }
