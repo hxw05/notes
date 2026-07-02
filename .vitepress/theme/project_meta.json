@@ -5,7 +5,7 @@
     "descriptionHtml": "Agent 工具的使用流水账"
   },
   {
-    "name": "agent_readings",
+    "name": "ai_readings",
     "link": null,
     "descriptionHtml": "AI 相关阅读记录"
   },
@@ -23,16 +23,6 @@
     "name": "how_to",
     "link": null,
     "descriptionHtml": "步骤记录"
-  },
-  {
-    "name": "media",
-    "link": null,
-    "descriptionHtml": "影视、书籍或游戏的简短记录"
-  },
-  {
-    "name": "mind_dumps",
-    "link": "/mind_dumps/",
-    "descriptionHtml": "个人日常想法记录"
   },
   {
     "name": "missing_2020",

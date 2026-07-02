@@ -7,7 +7,7 @@ order: -1
 
 这门课程所涵盖的内容十分丰富，涵盖Shell中的工具与脚本的使用、Git的原理与使用、调试和性能测试的进行、构建系统（building systems）、持续集成、简单的密码学概念等内容。正如其课程名所暗示的那样，这门课程不是对某个主题或学问的系统性探讨，而更像是对于计算机专业基础知识的补遗。
 
-:::details 本笔记中包含的内容树状图（可能不准确）
+:::details 本笔记中包含的内容树状图（AI整理，可能不准确）
 
 ```mermaid
 flowchart LR
@@ -75,6 +75,7 @@ flowchart LR
 
 本课程笔记主要是对YouTube上的课程视频以及Lecture Note的个人整理，可能会省略掉一些个人觉得没必要的部分（省略地不多），并添加一些我个人在看到相关部分的联想、过去的经验和额外的理解，因此不一定准确。Lecture 1-4的笔记主要基于视频理解，没有多少Lecture Note的整理，因此会略显简略；Lecture 5、Lecture 6的笔记在当时为了方便，是用英文编写的。如果你希望有一个标准的参考，请考虑查看Lecture Note（[2020年版](https://missing.csail.mit.edu/2020)，[2026年版](https://missing.csail.mit.edu/2026/)）。
 
+<!-- 
 下面是学完本课程之后的某个下午脑海里蹦出来的一些感想，just feel free to skip.
 
 ## \*nix is a type of solitude
@@ -83,7 +84,7 @@ flowchart LR
 
 就我个人来说，我很享受使用这类系统的过程——我的主力电脑的操作系统是macOS，我觉得除了一些兼容性问题（例如游戏、某些专业软件），我找不出什么它（对于我来说）不如Windows的地方，我甚至还很庆幸我选择了macOS，使得能够有一个近似于Linux的命令行界面；在云服务上，我通常会选择Debian-like，原因没有什么特别的，就是最开始接触了Ubuntu，后来就对这类系统用得越来越熟（一种犹如小鸡破壳、先入为主的好感）。以及我对于一些概念的最初了解以及一些程序（nginx、apache、apt、...）的最初认识，就是在这类系统上面形成的。
 
-因此我发现我与周围人语言交流的匮乏，在一定程度上也是由操作系统不匹配导致的。这是一个略显荒谬和意识流的结论，但从某种程度上来说，确实如此。注意：仅限周围人。可能他们在先前并不知道在Windows之外存在另一些系统；可能他们不知道GUI是什么，以及使用命令行有哪些理由（“我为什么要在这个黑框框里操作？”）；可能某些情况下命令行的样子会给他们一种电脑失控的感觉；可能他们衡量一个操作系统的好坏总是从一个端用户出发，通过是否可以打瓦、帧率有多高等因素来评判；......所以，我似乎找到了又一种[孤独的类型](https://book.douban.com/subject/4124727/)——操作系统孤独。
+因此我发现我与学校里周围人语言交流的匮乏，在一定程度上也是由操作系统不匹配导致的。这是一个略显荒谬和意识流的结论，但从某种程度上来说，确实如此。注意：仅限学校里的周围人。可能他们在先前并不知道在Windows之外存在另一些系统；可能他们不知道GUI是什么，以及使用命令行有哪些理由（“我为什么要在这个黑框框里操作？”）；可能某些情况下命令行的样子会给他们一种电脑失控的感觉；可能他们衡量一个操作系统的好坏总是通过是否可以打瓦、帧率有多高等因素来评判；......所以，我似乎找到了又一种[孤独的类型](https://book.douban.com/subject/4124727/)——操作系统孤独。
 
 ## Evaporation: thoughts on knowledge consumption
 
@@ -101,4 +102,4 @@ AI的流行，便是一次巨大的蒸发活动，将沉寂了数十年的人工
 [^6]: HTML会代替Markdown吗？为什么？ - 知乎 https://www.zhihu.com/question/2036741717039305145
 [^7]: <img style='height: 50px; display: inline-block' src='./markdown+html@wechat.jpg'/> 点击查看大图。图中展示了html markdown这一关键词在微信公众号的搜索结果。
 [^8]: 来自微信公众号“AINLP”（微信号nlpjob）的文章《别再用 Markdown 了，HTML 才是 AI 时代真正的输出格式》https://mp.weixin.qq.com/s/NOzpeTx4LXB0lB44HCDk7Q 
-[^9]: <img style='height: 50px; display: inline-block' src='./rag-vs-grep.jpg'/> 点击查看大图。图中展示了grep rag这一关键词在小红书上的搜索结果。
+[^9]: <img style='height: 50px; display: inline-block' src='./rag-vs-grep.jpg'/> 点击查看大图。图中展示了grep rag这一关键词在小红书上的搜索结果。 -->
