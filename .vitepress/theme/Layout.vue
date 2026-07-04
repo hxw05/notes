@@ -33,7 +33,9 @@ onMounted(() => {
 })
 
 const prefixText = computed(() => {
-    let res = [`本文发布于 ${frontmatter.value.date}`];
+    if (frontmatter.value.date) {
+        res.push(`本文发布于 ${frontmatter.value.date}`)
+    }
     if (frontmatter.value.origin) {
         if (frontmatter.value.origin.date) {
             res.push(`原文发布于 ${frontmatter.value.origin.date}`)
@@ -57,7 +59,7 @@ const prefixText = computed(() => {
             </button>
         </template>
         <template #doc-before>
-            <div class="doc-before" v-if="Object.values(frontmatter).length">
+            <div class="doc-before" v-if="prefixText">
                 <p v-html="prefixText"></p>
             </div>
             <!-- <h3 v-if="frontmatter.origin?.title" class="vp-doc-pre-title">
