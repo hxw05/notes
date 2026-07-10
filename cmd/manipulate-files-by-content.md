@@ -13,3 +13,8 @@ rg '目标内容' -l | tr \\n \\0 | xargs -0 -I {} rm '{}'
   - `-I {}`用来指定一个*replstr*（在这里是`{}`），用来在其形成的指令中自由指定参数位置
 
 `rg -l`之后还可以加grep/grep -v/...用于对路径名过滤。
+
+这里tr的这一步，主要是因为macOS上的xargs不支持`-d`参数来自定义分隔符，而只支持`-0`来指定使用NUL作为分隔符。不过NUL确实适合作为分隔符，因其不可能出现在路径中。
+
+- Ref: https://stackoverflow.com/a/71409498
+- 也可考虑`brew install findutil`然后使用gxargs来代替xargs从而弥补`-d`不可用的问题
