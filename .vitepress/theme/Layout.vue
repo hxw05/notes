@@ -33,6 +33,7 @@ onMounted(() => {
 })
 
 const prefixText = computed(() => {
+    const res = []
     if (frontmatter.value.date) {
         res.push(`本文发布于 ${frontmatter.value.date}`)
     }
