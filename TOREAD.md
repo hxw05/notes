@@ -3,10 +3,12 @@ hidden: true
 ---
 # TOREAD
 
-## 2026.06
+## 2026.07
 
-- [ ] https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
-
+- [x] https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills 2026.07.15
+- [ ] https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+- [ ] https://github.com/repomirrorhq/repomirror/blob/main/repomirror.md
+- [ ] https://www.aihero.dev/getting-started-with-ralph
 - [ ] https://www.aihero.dev/tips-for-ai-coding-with-ralph-wiggum
 - [ ] https://www.cnblogs.com/alisystemsoftware/p/19540015
 
@@ -14,6 +16,8 @@ hidden: true
 - [ ] https://simonwillison.net/2025/Sep/18/agents/
 - [ ] https://huggingface.co/blog/Esmail-AGumaan/attention-is-all-you-need
 - [ ] https://www.anthropic.com/engineering/writing-tools-for-agents
+
+## 2026.06
 
 - [x] https://www.trychroma.com/research/context-rot 2026.06.06
 
