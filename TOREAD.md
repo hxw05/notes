@@ -7,11 +7,11 @@ hidden: true
 
 - [x] https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills 2026.07.15
 - [ ] https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+- [ ] https://ghuntley.com/ralph/
 - [ ] https://github.com/repomirrorhq/repomirror/blob/main/repomirror.md
 - [ ] https://www.aihero.dev/getting-started-with-ralph
 - [ ] https://www.aihero.dev/tips-for-ai-coding-with-ralph-wiggum
 - [ ] https://www.cnblogs.com/alisystemsoftware/p/19540015
-
 - [ ] https://www.anthropic.com/engineering/multi-agent-research-system
 - [ ] https://simonwillison.net/2025/Sep/18/agents/
 - [ ] https://huggingface.co/blog/Esmail-AGumaan/attention-is-all-you-need
