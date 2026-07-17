@@ -15,3 +15,5 @@ git filter-repo --email-callback "return b'NEW_EMAIL' if email == b'OLD_EMAIL' e
 ```sh
 git push origin --all --force
 ```
+
+如果使用的是GitHub并且做这个操作是为了隐藏公开邮箱地址（而非单纯的修改），建议在https://github.com/settings/emails打开“Block command line pushes that expose my email”来防止将来的意外提交。
