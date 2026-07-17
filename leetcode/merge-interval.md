@@ -5,6 +5,8 @@ tags: sort
 
 # 56. 合并区间
 
+排序后，选中某一个区间，向前看尽可能合并，合并完毕后，从新的位置开始。排序确保了这个过程是不重不漏的。
+
 ```js
 /**
  * @param {number[][]} intervals
@@ -20,7 +22,8 @@ var merge = function (intervals) {
     let right = intervals[current][1];
     let p = current + 1;
     while (p < intervals.length) {
-      let [l, r] = intervals[p];
+      let l = intervals[p][0];
+      let r = intervals[p][1];
       if (l > right || r < left) break;
       // 后一个等号可不带
       if (l >= left && r >= right) {
