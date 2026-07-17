@@ -17,3 +17,20 @@ git push origin --all --force
 ```
 
 如果使用的是GitHub并且做这个操作是为了隐藏公开邮箱地址（而非单纯的修改），建议在https://github.com/settings/emails打开“Block command line pushes that expose my email”来防止将来的意外提交。
+
+## 替换作者以及邮箱地址
+
+```sh
+# Source - https://stackoverflow.com/a/69947947
+# Posted by charsi, modified by community. See post 'Timeline' for change history
+# Retrieved 2026-07-17, License - CC BY-SA 4.0
+
+git filter-repo --commit-callback '
+    if commit.author_email == b"incorrect@email":
+        commit.author_email = b"correct@email" 
+        commit.author_name = b"Correct Name"
+        commit.committer_email = b"correct@email" 
+        commit.committer_name = b"Correct Name"
+' 
+```
+注意callback字符串内的缩进（类似于Python的要求）。
