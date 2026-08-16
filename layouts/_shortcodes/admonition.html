@@ -1,0 +1,14 @@
+{{- $type := .Get "type" | default "note" -}}
+{{- $title := .Get "title" -}}
+{{- $content := .Inner | .Page.RenderString -}}
+{{- if eq $type "details" -}}
+<details class="admonition details">
+  {{- with $title -}}<summary>{{ . }}</summary>{{- end -}}
+  <div class="admonition-body">{{ $content }}</div>
+</details>
+{{- else -}}
+<div class="admonition {{ $type }}">
+  {{- with $title -}}<p class="admonition-title">{{ . }}</p>{{- end -}}
+  <div class="admonition-body">{{ $content }}</div>
+</div>
+{{- end -}}

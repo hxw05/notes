@@ -1,7 +1,7 @@
 .DS_Store
 __MACOSX
-node_modules
 .vscode
-.vitepress/cache
-.vitepress/dist
-pi-generated/
+.hugo_build.lock
+node_modules/
+/public/
+/resources/_gen/

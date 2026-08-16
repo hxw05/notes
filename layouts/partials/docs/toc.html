@@ -1,0 +1,5 @@
+{{ partial "docs/inject/toc-before" . }}
+{{ $toc := .TableOfContents }}
+{{ $toc = replaceRE `</?(?:code|em|strong|b|i|u|s|small|mark|kbd|samp|var|sub|sup|del|ins|q)(?:\s[^>]*)?>` "" $toc }}
+{{ $toc | safeHTML }}
+{{ partial "docs/inject/toc-after" . }}

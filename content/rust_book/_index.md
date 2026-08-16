@@ -1,0 +1,6 @@
+---
+bookCollapseSection: true
+description: "[Rust 程序设计语言（KaiserY 翻译版）](https://kaisery.github.io/trpl-zh-cn/) 阅读记录"
+---
+
+# rust_book

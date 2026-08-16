@@ -1,0 +1,38 @@
+baseURL = '/'
+locale = 'zh-cn'
+title = 'whxnotes'
+theme = 'hugo-book'
+enableGitInfo = true
+timeZone = 'Asia/Shanghai'
+
+[pagination]
+pagerSize = 30
+
+[markup.goldmark.extensions]
+footnote = true
+
+[markup.goldmark.extensions.passthrough]
+enable = true
+
+[markup.goldmark.extensions.passthrough.delimiters]
+block = [['$$', '$$']]
+inline = [['$', '$']]
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[markup.highlight]
+noClasses = false
+
+[markup.tableOfContents]
+startLevel = 2
+endLevel = 3
+
+[params]
+description = 'Notes taken by whx'
+BookFavicon = 'w.png'
+BookSection = '*'
+BookTheme = 'auto'
+BookSearch = false
+BookComments = false
+BookDateFormat = '2006-01-02'
