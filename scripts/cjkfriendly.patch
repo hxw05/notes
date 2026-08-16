@@ -1,0 +1,95 @@
+diff --git a/go.mod b/go.mod
+index e10b249..576ff67 100644
+--- a/go.mod
++++ b/go.mod
+@@ -66,6 +66,7 @@ require (
+ 	github.com/spf13/cobra v1.10.2
+ 	github.com/spf13/fsync v0.10.1
+ 	github.com/spf13/pflag v1.0.10
++	github.com/tats-u/goldmark-cjk-friendly/v2 v2.0.2
+ 	github.com/tdewolff/minify/v2 v2.24.16
+ 	github.com/tdewolff/parse/v2 v2.8.15
+ 	github.com/tetratelabs/wazero v1.12.0
+diff --git a/go.sum b/go.sum
+index 7910ff2..7b9f628 100644
+--- a/go.sum
++++ b/go.sum
+@@ -489,6 +489,8 @@ github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO
+ github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
+ github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu7U=
+ github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
++github.com/tats-u/goldmark-cjk-friendly/v2 v2.0.2 h1:+N9clTED51Tt55ljeXYXufmqS8wUXpLJW771aIGIRxo=
++github.com/tats-u/goldmark-cjk-friendly/v2 v2.0.2/go.mod h1:1Wm+kJwLMq/sr22CCei+eN593nanPDVn1eH91QdVPEI=
+ github.com/tdewolff/minify/v2 v2.24.16 h1:1d+IHElvmYM2zJtuykMK/esiqc4H/7pqPKAa7jpSUUU=
+ github.com/tdewolff/minify/v2 v2.24.16/go.mod h1:G6yep6HFo3u2eoOcIVBKSNwpoW2wXvPjvnFRj3w1zlc=
+ github.com/tdewolff/parse/v2 v2.8.15 h1:3/Psth16LHpsy2NS/7ShXDsoWt1x0f3tQMSbmQi+jO8=
+diff --git a/markup/goldmark/convert.go b/markup/goldmark/convert.go
+index 8ed16b0..378f4cc 100644
+--- a/markup/goldmark/convert.go
++++ b/markup/goldmark/convert.go
+@@ -27,6 +27,7 @@ import (
+ 	"github.com/gohugoio/hugo/markup/goldmark/internal/render"
+ 	"github.com/gohugoio/hugo/markup/goldmark/passthrough"
+ 	"github.com/gohugoio/hugo/markup/goldmark/tables"
++	cjkFriendly "github.com/tats-u/goldmark-cjk-friendly/v2"
+ 	"github.com/yuin/goldmark/util"
+ 
+ 	"github.com/yuin/goldmark"
+@@ -159,7 +160,7 @@ func newMarkdown(pcfg converter.ProviderConfig) goldmark.Markdown {
+ 		extensions = append(extensions, tables.New())
+ 	}
+ 
+-	if cfg.Extensions.Strikethrough {
++	if cfg.Extensions.Strikethrough && !cfg.Extensions.CJKFriendly.Emphasis {
+ 		extensions = append(extensions, extension.Strikethrough)
+ 	}
+ 
+@@ -213,6 +214,14 @@ func newMarkdown(pcfg converter.ProviderConfig) goldmark.Markdown {
+ 		extensions = append(extensions, c)
+ 	}
+ 
++	if cfg.Extensions.CJKFriendly.Emphasis {
++		if cfg.Extensions.Strikethrough {
++			extensions = append(extensions, cjkFriendly.CJKFriendlyEmphasisAndStrikethrough)
++		} else {
++			extensions = append(extensions, cjkFriendly.CJKFriendlyEmphasis)
++		}
++	}
++
+ 	if cfg.Extensions.Passthrough.Enable {
+ 		extensions = append(extensions, passthrough.New(cfg.Extensions.Passthrough))
+ 	}
+diff --git a/markup/goldmark/goldmark_config/config.go b/markup/goldmark/goldmark_config/config.go
+index 595222c..ef70df4 100644
+--- a/markup/goldmark/goldmark_config/config.go
++++ b/markup/goldmark/goldmark_config/config.go
+@@ -57,6 +57,9 @@ var Default = Config{
+ 			EastAsianLineBreaksStyle: "simple",
+ 			EscapedSpace:             false,
+ 		},
++		CJKFriendly: CJKFriendly{
++			Emphasis: false,
++		},
+ 		Extras: Extras{
+ 			Delete: Delete{
+ 				Enable: false,
+@@ -168,6 +171,7 @@ type Extensions struct {
+ 	LinkifyProtocol string
+ 	TaskList        bool
+ 	CJK             CJK
++	CJKFriendly     CJKFriendly `json:"cjkFriendly"`
+ }
+ 
+ // Footnote holds footnote configuration.
+@@ -256,6 +260,11 @@ type DelimitersConfig struct {
+ 	Block [][]string
+ }
+ 
++type CJKFriendly struct {
++	// Emphasis adds support for CJK-friendly 'emphasis'. If "strikethrough" goldmark extension is enabled as well, CJK-friendly 'emphasis and strikethrough' will be used.
++	Emphasis bool
++}
++
+ type CJK struct {
+ 	// Whether to enable CJK support.
+ 	Enable bool

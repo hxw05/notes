@@ -5,3 +5,5 @@ __MACOSX
 node_modules/
 /public/
 /resources/_gen/
+bin/
+.hugo-build/
