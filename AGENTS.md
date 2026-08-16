@@ -5,7 +5,7 @@ This file provides guidance to AI coding agents working in this repository.
 ## Build commands
 
 ```
-./scripts/build-hugo.sh    # Build patched Hugo into bin/ (clones upstream v0.165.0 + scripts/cjkfriendly.patch; re-run after Hugo upgrades)
+./scripts/build-hugo.sh    # Build patched Hugo into bin/ (clones upstream v0.165.0 + scripts/cjkfriendly.patch, and goldmark v1.8.5 + scripts/goldmark-cjkfriendly.patch; re-run after Hugo/goldmark upgrades)
 npm install                # Install build-time Shiki dependencies
 ./bin/hugo server          # Start dev server (client-side Shiki fallback)
 npm run build              # Hugo + Shiki pre-render into public/ (used by GitHub Actions)
@@ -20,6 +20,15 @@ behind `[markup.goldmark.extensions.cjkFriendly] emphasis = true` in
 `hugo.toml`. Use `./bin/hugo` for everything — never the system hugo. When
 upstream merges #14115, delete `scripts/cjkfriendly.patch` and go back to
 official Hugo binaries; the config key stays the same.
+
+A second patch (`scripts/goldmark-cjkfriendly.patch`) is applied to a local
+fork of goldmark v1.8.5 (`.hugo-build/goldmark`, wired in via a `replace`
+directive in the hugo patch). It makes `parseInline` trigger inline parsers
+right after a multi-byte (CJK) character, so bare URLs following Chinese
+text/full-width punctuation (`中文：https://...。`) are linkified while trailing
+CJK punctuation stays outside the link (the goldmark linkify URL regexp is
+ASCII-only). `linkify = true` is set explicitly in `hugo.toml` (already the
+Hugo default). The trigger change is inert when linkify is disabled.
 
 ## Architecture
 
@@ -46,7 +55,7 @@ deployed to GitHub Pages via `.github/workflows/deploy.yml`).
 - `layouts/_shortcodes/admonition.html` — supports the migrated `:::tip/info/warning/details` containers
 - `layouts/partials/docs/toc.html` — strips inline code/emphasis styling from TOC entries
 - `assets/styles/custom.css` — minimal styling for admonitions and math blocks
-- `layouts/partials/docs/inject/body.html` — enables medium-zoom and a client-side Shiki fallback for `hugo server`
+- `layouts/partials/docs/inject/body.html` — enables medium-zoom, a client-side Shiki fallback for `hugo server`, and the mobile headroom top bar (`assets/js/headroom.js` + sticky styles in `assets/styles/custom.css` under the ≤56rem breakpoint)
 - `layouts/single.html` and `layouts/list.html` — render the article body; the heading comes from the content H1
 - `layouts/partials/docs/title.html` — derives menu/header/browser titles from the first H1 in content
 - `layouts/partials/opengraph.html`, `layouts/partials/schema.html`, and `layouts/_default/rss.xml` — keep social/RSS metadata titles in sync with the H1-derived title

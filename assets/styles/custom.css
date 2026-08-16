@@ -68,6 +68,22 @@
   z-index: 10000;
 }
 
+/* Automatic CJK-Latin spacing (CSS Text 4, Chrome 140+/Safari 18.4+/Firefox 145+). */
+body {
+  text-autospace: normal;
+}
+
+/* Latin/neutral text uses Open Sans; CJK falls through to system fonts. */
+body {
+  font-family: 'Open Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+pre,
+code {
+  text-autospace: no-autospace;
+}
+
 /* Shiki dual-theme variables: explicit dark themes. */
 :root[data-theme$="dark"] .shiki,
 :root[data-theme$="dark"] .shiki span {
@@ -81,5 +97,69 @@
   :root[data-theme$="auto"] .shiki span {
     color: var(--shiki-dark) !important;
     background-color: var(--shiki-dark-bg) !important;
+  }
+}
+
+/* Mobile top bar: sticky + headroom (see assets/js/headroom.js).
+   Desktop header is display:none (utils .hidden), so this only applies to
+   the mobile layout; .book-layout-landing keeps its desktop header intact. */
+@media screen and (max-width: 56rem) {
+  /* Root-cause fix for the scroll-to-top on menu/TOC taps: activating a
+     label focuses the hidden checkbox and the browser scrolls it into
+     view. The checkboxes are absolute-positioned at the top of the body,
+     so the page jumped to the top on every tap (smoothly, thanks to
+     scroll-behavior). Pinning them fixed at the viewport origin keeps
+     them inside the viewport at all times, so focusing never scrolls.
+     The checkbox hack itself (label + :checked sibling selectors) is
+     unchanged. */
+  #menu-control,
+  #toc-control {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  /* The top bar sticks to the viewport top: drop .book-page's top padding
+     (the header re-adds it internally) so there is no 1rem gap under the
+     stuck bar that shrinks away while scrolling. */
+  .book-page {
+    padding-top: 0;
+  }
+
+  .book-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    margin-bottom: 0; /* avoid a gap showing through under the stuck bar */
+    padding: var(--space-16) 0; /* top: replaces .book-page padding; bottom: spacing from content */
+    background: var(--body-background);
+    box-shadow: 0 1px 0 var(--gray-200);
+    transition: transform 0.2s ease;
+    will-change: transform;
+  }
+
+  .book-header.headroom-hidden {
+    transform: translateY(-100%);
+  }
+
+  /* Anchors (TOC links, heading ids) would scroll under the stuck bar. */
+  html {
+    scroll-padding-top: 4rem;
+  }
+
+  /* TOC drawer inside the stuck header: balanced spacing (the theme's
+     nav > ul carries a bottom margin that would stack with the header's
+     padding-bottom) and internal scrolling when it exceeds the viewport. */
+  #toc-control:checked ~ main .book-header aside {
+    max-height: calc(100dvh - 4.5rem);
+    overflow-y: auto;
+  }
+
+  #toc-control:checked ~ main .book-header aside nav {
+    margin-top: var(--space-16);
+  }
+
+  #toc-control:checked ~ main .book-header aside nav > ul {
+    margin-bottom: 0; /* cancel the theme default; the header's padding-bottom stays */
   }
 }

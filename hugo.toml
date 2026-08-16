@@ -10,6 +10,7 @@ pagerSize = 30
 
 [markup.goldmark.extensions]
 footnote = true
+linkify = true
 
 [markup.goldmark.extensions.passthrough]
 enable = true

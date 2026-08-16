@@ -1,14 +1,4 @@
 (() => {
-  const root = document.documentElement;
-  const media = window.matchMedia('(prefers-color-scheme: dark)');
-
-  const isDark = () => {
-    const theme = root.dataset.theme || 'light';
-    return theme.endsWith('dark') || (theme.endsWith('auto') && media.matches);
-  };
-
-  const themeName = () => (isDark() ? 'github-dark' : 'github-light');
-
   let codeToHtmlPromise = null;
   const getCodeToHtml = () => {
     if (!codeToHtmlPromise) {
@@ -22,43 +12,38 @@
     return cls ? cls.slice('language-'.length).toLowerCase() : 'text';
   };
 
-  const renderOne = async (pre, lang, theme) => {
+  const renderOne = async (pre, lang) => {
     const code = pre.querySelector('code');
     const source = code ? code.textContent : pre.textContent;
     try {
       const codeToHtml = await getCodeToHtml();
-      const html = await codeToHtml(source, { lang: lang || 'text', theme });
+      // Dual-theme output, matching scripts/shiki.mjs: both light and dark
+      // token colors are embedded (color + --shiki-dark / --shiki-dark-bg
+      // variables), and assets/styles/custom.css switches them via
+      // data-theme / prefers-color-scheme. No re-rendering on theme change.
+      const html = await codeToHtml(source, {
+        lang: lang || 'text',
+        themes: { light: 'github-light', dark: 'github-dark' },
+        defaultColor: 'light'
+      });
       const template = document.createElement('template');
       template.innerHTML = html.trim();
       const next = template.content.firstElementChild;
       if (!next || next.tagName !== 'PRE') return;
       next.dataset.shiki = 'true';
       next.dataset.shikiLang = lang || 'text';
-      next.dataset.shikiTheme = theme;
       pre.replaceWith(next);
     } catch (error) {
       pre.dataset.shiki = 'plain';
     }
   };
 
-  const highlightAll = async (refresh = false) => {
-    const theme = themeName();
-    let pres;
-    if (refresh) {
-      pres = Array.from(document.querySelectorAll('pre[data-shiki="true"]'));
-    } else {
-      pres = Array.from(document.querySelectorAll('pre code[class*="language-"]'))
-        .map((code) => code.closest('pre'))
-        .filter((pre) => pre && !pre.dataset.shiki);
-    }
+  const highlightAll = async () => {
+    const pres = Array.from(document.querySelectorAll('pre code[class*="language-"]'))
+      .map((code) => code.closest('pre'))
+      .filter((pre) => pre && !pre.dataset.shiki);
     await Promise.all(
-      pres.map((pre) => {
-        const code = pre.querySelector('code');
-        const lang = refresh
-          ? pre.dataset.shikiLang || 'text'
-          : languageOf(code);
-        return renderOne(pre, lang, theme);
-      })
+      pres.map((pre) => renderOne(pre, languageOf(pre.querySelector('code'))))
     );
   };
 
@@ -75,9 +60,4 @@
   });
 
   highlightAll();
-  media.addEventListener('change', () => highlightAll(true));
-  new MutationObserver(() => highlightAll(true)).observe(root, {
-    attributes: true,
-    attributeFilter: ['data-theme']
-  });
 })();

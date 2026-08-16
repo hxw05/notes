@@ -1,0 +1,25 @@
+diff --git a/parser/parser.go b/parser/parser.go
+index 05d5649..beef799 100644
+--- a/parser/parser.go
++++ b/parser/parser.go
+@@ -1205,9 +1205,18 @@ func (p *parser) parseBlock(block text.BlockReader, parent ast.Node, pc Context)
+ 			}
+ 			isSpace := util.IsSpace(c) && c != '\r' && c != '\n'
+ 			isPunct := util.IsPunct(c)
+-			if (isPunct && !escaped) || isSpace && !(escaped && p.escapedSpace) || i == 0 {
++			// CJK-friendly (see hugo's scripts/goldmark-cjkfriendly.patch): also
++			// trigger inline parsers at a position right after a multi-byte
++			// (CJK) character, so that e.g. bare URLs directly following Chinese
++			// text or full-width punctuation are linkified. line[i-1] being a
++			// UTF-8 continuation byte and line[i] not means the previous rune
++			// just ended here. The ' ' bucket contains only the LinkifyParser
++			// (or is empty when linkify is disabled), so this is a no-op
++			// otherwise.
++			afterCJK := !isSpace && !isPunct && i > 0 && line[i-1]&0xc0 == 0x80 && line[i]&0xc0 != 0x80
++			if (isPunct && !escaped) || isSpace && !(escaped && p.escapedSpace) || i == 0 || afterCJK {
+ 				parserChar := c
+-				if isSpace || (i == 0 && !isPunct) {
++				if isSpace || (i == 0 && !isPunct) || afterCJK {
+ 					parserChar = ' '
+ 				}
+ 				ips := p.inlineParsers[parserChar]
