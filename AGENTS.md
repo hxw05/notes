@@ -11,11 +11,15 @@ npm install                # Install build-time Shiki dependencies
 npm run build              # Hugo + Shiki pre-render into public/ (used by GitHub Actions)
 ```
 
-The site uses a **patched Hugo binary** (`bin/hugo`): the stock parser fails on
-CJK emphasis (e.g. `**第六列（...）**表示...` renders literally, see
-gohugoio/hugo#14114). The patch wires tats-u/goldmark-cjk-friendly behind
-`[markup.goldmark.extensions.cjkFriendly] emphasis = true` in `hugo.toml`;
-see README.md. Use `./bin/hugo` for everything — never the system hugo.
+The site uses a **patched Hugo binary** (`bin/hugo`): the stock parser follows
+CommonMark flanking rules that fail on CJK typography — e.g.
+`**第六列（...）**表示...` renders the `**` literally when the closing delimiters
+sit between full-width punctuation and a CJK letter (gohugoio/hugo#14114,
+PR #14115 unmerged as of 0.165.0). The patch wires tats-u/goldmark-cjk-friendly
+behind `[markup.goldmark.extensions.cjkFriendly] emphasis = true` in
+`hugo.toml`. Use `./bin/hugo` for everything — never the system hugo. When
+upstream merges #14115, delete `scripts/cjkfriendly.patch` and go back to
+official Hugo binaries; the config key stays the same.
 
 ## Architecture
 
@@ -29,7 +33,8 @@ files — these are the notes.
 **Config**: `hugo.toml` enables the Goldmark passthrough extension for `$...$` /
 `$$...$$` math, footnotes, and `cjkFriendly.emphasis = true` (CJK-friendly
 emphasis, provided by the patched binary — see Build commands above). Hugo is
-pinned to 0.165.0 in GitHub Actions (built from source with the patch).
+pinned to 0.165.0 in GitHub Actions (built from source with the patch, then
+deployed to GitHub Pages via `.github/workflows/deploy.yml`).
 
 **Theme**: `themes/hugo-book/` is used with these project-level overrides:
 - `layouts/partials/docs/inject/head.html` — loads MathJax for `$...$` / `$$...$$`
