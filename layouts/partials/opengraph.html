@@ -9,8 +9,8 @@
 	<meta property="og:title" content="{{ . }}">
 {{- end }}
 
-{{- with or .Description .Summary site.Params.description | plainify | htmlUnescape }}
-	<meta property="og:description" content="{{ trim . "\n\r\t " }}">
+{{- with partial "docs/meta-description" . }}
+	<meta property="og:description" content="{{ . }}">
 {{- end }}
 
 {{- with or .Params.locale site.Language.Locale }}

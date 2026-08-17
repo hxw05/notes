@@ -55,7 +55,9 @@ deployed to GitHub Pages via `.github/workflows/deploy.yml`).
 - `layouts/_shortcodes/admonition.html` — supports the migrated `:::tip/info/warning/details` containers
 - `layouts/partials/docs/toc.html` — strips inline code/emphasis styling from TOC entries
 - `assets/styles/custom.css` — minimal styling for admonitions and math blocks
-- `layouts/partials/docs/inject/body.html` — enables medium-zoom, a client-side Shiki fallback for `hugo server`, and the mobile headroom top bar (`assets/js/headroom.js` + sticky styles in `assets/styles/custom.css` under the ≤56rem breakpoint)
+- `layouts/baseof.html` — copy of the theme's base template with the mobile drawer mechanism de-hacked: the theme's hidden-checkbox inputs and `:checked` sibling selectors are replaced by `body.menu-open` / `body.toc-open` classes toggled from `assets/js/topbar.js`; the overlay label becomes a plain div (`#menu-overlay`), and the drawers get ids (`#menu-drawer`, `#toc-drawer`) for the toggle buttons' `aria-controls`
+- `layouts/partials/docs/header.html` — the mobile top bar: real `<button>` toggles (`#menu-toggle`, `#toc-toggle`, with `aria-expanded`) instead of the theme's label/checkbox pair
+- `layouts/partials/docs/inject/body.html` — enables medium-zoom, a client-side Shiki fallback for `hugo server`, and the mobile top bar (`assets/js/topbar.js` + fixed-bar/drawer styles in `assets/styles/custom.css` under the ≤56rem breakpoint)
 - `layouts/single.html` and `layouts/list.html` — render the article body; the heading comes from the content H1
 - `layouts/partials/docs/title.html` — derives menu/header/browser titles from the first H1 in content
 - `layouts/partials/opengraph.html`, `layouts/partials/schema.html`, and `layouts/_default/rss.xml` — keep social/RSS metadata titles in sync with the H1-derived title

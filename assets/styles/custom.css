@@ -79,6 +79,17 @@ body {
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
 
+/* Headings: the theme pins line-height to 1, which looks cramped for dense
+   CJK glyphs once a title wraps; give all levels the same roomier spacing. */
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  line-height: 1.3;
+}
+
 pre,
 code {
   text-autospace: no-autospace;
@@ -100,66 +111,150 @@ code {
   }
 }
 
-/* Mobile top bar: sticky + headroom (see assets/js/headroom.js).
+/* Mobile top bar + drawers: fully JS-driven (see assets/js/topbar.js).
    Desktop header is display:none (utils .hidden), so this only applies to
    the mobile layout; .book-layout-landing keeps its desktop header intact. */
 @media screen and (max-width: 56rem) {
-  /* Root-cause fix for the scroll-to-top on menu/TOC taps: activating a
-     label focuses the hidden checkbox and the browser scrolls it into
-     view. The checkboxes are absolute-positioned at the top of the body,
-     so the page jumped to the top on every tap (smoothly, thanks to
-     scroll-behavior). Pinning them fixed at the viewport origin keeps
-     them inside the viewport at all times, so focusing never scrolls.
-     The checkbox hack itself (label + :checked sibling selectors) is
-     unchanged. */
-  #menu-control,
-  #toc-control {
+  /* Top bar row: 2 × 1rem vertical space + 1.5rem icon row (icons are 24px).
+     --topbar-space adds the 1rem gap between the bar and the content; the
+     page reserves it (padding) and anchors stop below it (scroll-padding). */
+  :root {
+    --topbar-height: calc(var(--space-16) * 2 + 1.5rem);
+    --topbar-space: calc(var(--topbar-height) + var(--space-16));
+  }
+
+  /* The bar is fixed at the viewport top; .book-page's padding-top below
+     reserves its exact height so content never slides under it. left/right
+     mirror the theme's .book-page horizontal padding, keeping the bar
+     aligned with the content column. */
+  .book-header {
     position: fixed;
     top: 0;
-    left: 0;
-  }
-
-  /* The top bar sticks to the viewport top: drop .book-page's top padding
-     (the header re-adds it internally) so there is no 1rem gap under the
-     stuck bar that shrinks away while scrolling. */
-  .book-page {
-    padding-top: 0;
-  }
-
-  .book-header {
-    position: sticky;
-    top: 0;
+    left: var(--space-16);
+    right: var(--space-16);
     z-index: 2;
-    margin-bottom: 0; /* avoid a gap showing through under the stuck bar */
-    padding: var(--space-16) 0; /* top: replaces .book-page padding; bottom: spacing from content */
+    display: flex;
+    align-items: center;
+    height: var(--topbar-height);
     background: var(--body-background);
     box-shadow: 0 1px 0 var(--gray-200);
     transition: transform 0.2s ease;
-    will-change: transform;
   }
 
   .book-header.headroom-hidden {
     transform: translateY(-100%);
   }
 
-  /* Anchors (TOC links, heading ids) would scroll under the stuck bar. */
-  html {
-    scroll-padding-top: 4rem;
+  /* Toggle buttons replace the theme's label/checkbox pair; reset button
+     chrome, otherwise the icons keep their original look. */
+  .book-header .book-header-toggle {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    line-height: 0;
+    cursor: pointer;
   }
 
-  /* TOC drawer inside the stuck header: balanced spacing (the theme's
-     nav > ul carries a bottom margin that would stack with the header's
-     padding-bottom) and internal scrolling when it exceeds the viewport. */
-  #toc-control:checked ~ main .book-header aside {
-    max-height: calc(100dvh - 4.5rem);
+  /* The bar is a flex container itself, so the row must fill it (flex-basis
+     auto would shrink it to its content width, pulling the buttons away
+     from the bar edges). */
+  .book-header .book-header-row {
+    flex: 1 1 0%;
+    min-width: 0;
+  }
+
+  /* The title takes all the space between the two fixed-width buttons and
+     centers its text, so it sits at the bar's geometric center (both
+     buttons are the same 24px icon). min-width: 0 + nowrap let the
+     theme's ellipsis kick in for long titles instead of wrapping. */
+  .book-header .book-header-title {
+    flex: 1 1 0%;
+    min-width: 0;
+    margin: 0 var(--space-16);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* .book-page must stay a stacking context at all times: its opacity 0.25
+     only creates one while the menu drawer is open, so when the drawer
+     closes and opacity returns to 1 the context is destroyed — the bar's
+     z-index: 2 would then compete with the drawer in main's context, and if
+     the drawer's hide is delayed by a compositor frame it visibly drops
+     below the bar. Pin the context (position + z-index) and raise the
+     drawer above the bar so the two can never swap order. */
+  .book-page {
+    position: relative;
+    z-index: 1;
+    padding-top: var(--topbar-space); /* bar + breathing room below it */
+  }
+
+  .book-menu {
+    z-index: 3; /* above the bar (z-index: 2, inside .book-page) */
+  }
+
+  /* TOC drawer: a dropdown panel anchored under the bar. It always overlays
+     the content instead of growing the bar (the old in-flow panel pushed
+     content down at the top of the page but overlapped it when scrolled).
+     With the panel open the bar drops its own hairline so bar and panel
+     read as one piece with a single bottom edge, as before. */
+  body.toc-open .book-header {
+    box-shadow: none;
+  }
+
+  body.toc-open .book-header aside {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: calc(100dvh - var(--topbar-height));
     overflow-y: auto;
+    background: var(--body-background);
+    box-shadow: 0 1px 0 var(--gray-200);
+    padding-bottom: var(--space-16); /* was the header's bottom padding */
   }
 
-  #toc-control:checked ~ main .book-header aside nav {
+  body.toc-open .book-header aside nav {
     margin-top: var(--space-16);
   }
 
-  #toc-control:checked ~ main .book-header aside nav > ul {
-    margin-bottom: 0; /* cancel the theme default; the header's padding-bottom stays */
+  body.toc-open .book-header aside nav > ul {
+    margin-bottom: 0; /* cancel the theme's nav > ul default */
+  }
+
+  /* Menu drawer: the theme's :checked sibling selectors are gone, so the
+     open state moves here under body classes (same transforms/shadows). */
+  body.menu-open .book-menu {
+    visibility: initial;
+  }
+
+  body.menu-open .book-menu .book-menu-content {
+    transform: translateX(var(--menu-width));
+    box-shadow: 0 0 var(--space-8) rgba(0, 0, 0, 0.1);
+  }
+
+  body.menu-open .book-page {
+    opacity: 0.25;
+  }
+
+  body.menu-open .book-menu-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  /* for RTL support */
+  body[dir="rtl"].menu-open .book-menu .book-menu-content {
+    transform: translateX(calc(-1 * var(--menu-width)));
+  }
+
+  /* Anchor targets scroll below the bar and its gap (no-JS fallback; the
+     JS switches this to 0 while the bar is hidden). */
+  html {
+    scroll-padding-top: var(--topbar-space);
   }
 }

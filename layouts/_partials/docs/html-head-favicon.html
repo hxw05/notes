@@ -1,0 +1,16 @@
+{{- /* Favicon that follows the OS light/dark scheme using native media
+  queries — no JS. Chrome/Edge/Firefox honor the media attribute on icon
+  links and switch live when the system theme changes; the light link is
+  listed first so browsers that ignore the attribute (Safari) fall back to
+  the light icon. The dark variant is derived from the configured light icon
+  by inserting "-invert" before the extension (w.png -> w-invert.png),
+  mirroring the naming convention in static/; set BookFaviconDark in
+  hugo.toml to override. */ -}}
+{{- $light := .Site.Params.BookFavicon | default "favicon.png" -}}
+{{- $dark := .Site.Params.BookFaviconDark -}}
+{{- if not $dark -}}
+  {{- $ext := path.Ext $light -}}
+  {{- $dark = printf "%s-invert%s" (strings.TrimSuffix $ext $light) $ext -}}
+{{- end -}}
+<link rel="icon" href="{{ $light | relURL }}" media="(prefers-color-scheme: light)">
+<link rel="icon" href="{{ $dark | relURL }}" media="(prefers-color-scheme: dark)">

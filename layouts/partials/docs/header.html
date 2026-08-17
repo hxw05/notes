@@ -1,0 +1,13 @@
+<div class="flex align-center book-header-row">
+  <button type="button" id="menu-toggle" class="book-header-toggle" aria-controls="menu-drawer" aria-expanded="false" aria-label="菜单">
+    <img src="{{ partial "docs/icon" "menu" }}" class="book-icon" alt="" />
+  </button>
+
+  <h3 class="book-header-title">{{ partial "docs/title" . }}</h3>
+
+  {{ if partial "docs/toc-show" . }}
+  <button type="button" id="toc-toggle" class="book-header-toggle" aria-controls="toc-drawer" aria-expanded="false" aria-label="目录">
+    <img src="{{ partial "docs/icon" "toc" }}" class="book-icon" alt="" />
+  </button>
+  {{ end }}
+</div>
