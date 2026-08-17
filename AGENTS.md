@@ -2,6 +2,10 @@
 
 This file provides guidance to AI coding agents working in this repository.
 
+## Do not commit automatically
+
+You should never commit automatically.
+
 ## Build commands
 
 ```
@@ -49,7 +53,7 @@ deployed to GitHub Pages via `.github/workflows/deploy.yml`).
 **directly in-tree** — the theme is a local fork of upstream, not a clean submodule
 with external overrides. Upstream updates are merged/rebased onto these local
 changes. The customizations are:
-- `layouts/_partials/docs/inject/head.html` — loads MathJax for `$...$` / `$$...$$`, Open Sans, and overrides the dark theme-color
+- `layouts/_partials/docs/inject/head.html` — loads MathJax for `$...$` / `$$...$$`, loads fonts per `theme.toml` `[params]` (`BookFontsGoogle` / `BookFontFamily`, overridable in `hugo.toml`), and overrides the dark theme-color
 - `layouts/_markup/render-codeblock.html` — emits raw code blocks for Shiki (build-time + client fallback)
 - `scripts/shiki.mjs` — pre-renders Shiki light/dark themes into `public/`
 - `layouts/_markup/render-passthrough.html` — wraps math delimiters for MathJax
