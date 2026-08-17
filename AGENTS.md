@@ -45,26 +45,37 @@ emphasis, provided by the patched binary — see Build commands above). Hugo is
 pinned to 0.165.0 in GitHub Actions (built from source with the patch, then
 deployed to GitHub Pages via `.github/workflows/deploy.yml`).
 
-**Theme**: `themes/hugo-book/` is used with these project-level overrides:
-- `layouts/partials/docs/inject/head.html` — loads MathJax for `$...$` / `$$...$$`
-- `layouts/_markup/render-codeblock.html` — emits raw code blocks for build-time Shiki
+**Theme**: `themes/hugo-book/` (a git submodule) carries all site customizations
+**directly in-tree** — the theme is a local fork of upstream, not a clean submodule
+with external overrides. Upstream updates are merged/rebased onto these local
+changes. The customizations are:
+- `layouts/_partials/docs/inject/head.html` — loads MathJax for `$...$` / `$$...$$`, Open Sans, and overrides the dark theme-color
+- `layouts/_markup/render-codeblock.html` — emits raw code blocks for Shiki (build-time + client fallback)
 - `scripts/shiki.mjs` — pre-renders Shiki light/dark themes into `public/`
 - `layouts/_markup/render-passthrough.html` — wraps math delimiters for MathJax
-- `layouts/_markup/render-link.html` — rewrites internal `.md` links to Hugo page URLs
-- `layouts/_markup/render-image.html` — rewrites relative image paths to their built Hugo URLs
+- `layouts/_markup/render-link.html` — rewrites internal `.md` links to Hugo page URLs (replaces the theme's `BookPortableLinks` mechanism)
+- `layouts/_markup/render-image.html` — rewrites relative image paths to their built Hugo URLs (replaces `BookPortableLinks`)
 - `layouts/_shortcodes/admonition.html` — supports the migrated `:::tip/info/warning/details` containers
-- `layouts/partials/docs/toc.html` — strips inline code/emphasis styling from TOC entries
-- `assets/styles/custom.css` — minimal styling for admonitions and math blocks
-- `layouts/baseof.html` — copy of the theme's base template with the mobile drawer mechanism de-hacked: the theme's hidden-checkbox inputs and `:checked` sibling selectors are replaced by `body.menu-open` / `body.toc-open` classes toggled from `assets/js/topbar.js`; the overlay label becomes a plain div (`#menu-overlay`), and the drawers get ids (`#menu-drawer`, `#toc-drawer`) for the toggle buttons' `aria-controls`
-- `layouts/partials/docs/header.html` — the mobile top bar: real `<button>` toggles (`#menu-toggle`, `#toc-toggle`, with `aria-expanded`) instead of the theme's label/checkbox pair
-- `layouts/partials/docs/inject/body.html` — enables medium-zoom, a client-side Shiki fallback for `hugo server`, and the mobile top bar (`assets/js/topbar.js` + fixed-bar/drawer styles in `assets/styles/custom.css` under the ≤56rem breakpoint)
+- `layouts/_partials/docs/toc.html` — strips inline code/emphasis styling from TOC entries
+- `assets/styles/custom.css` — admonition/math styling, CJK spacing, grayscale dark mode (replaces the theme's Nord palette), Shiki dark variables, mobile drawer styles
+- `layouts/baseof.html` — the mobile drawer mechanism is de-hacked: the theme's hidden-checkbox inputs and `:checked` sibling selectors are replaced by `body.menu-open` / `body.toc-open` classes toggled from `assets/js/topbar.js`; the overlay label becomes a plain div (`#menu-overlay`), and the drawers get ids (`#menu-drawer`, `#toc-drawer`) for the toggle buttons' `aria-controls`
+- `layouts/_partials/docs/header.html` — the mobile top bar: real `<button>` toggles (`#menu-toggle`, `#toc-toggle`, with `aria-expanded`) instead of the theme's label/checkbox pair
+- `layouts/_partials/docs/inject/body.html` — enables medium-zoom, a client-side Shiki fallback for `hugo server`, and the mobile top bar (`assets/js/topbar.js` + fixed-bar/drawer styles in `assets/styles/custom.css` under the ≤56rem breakpoint)
 - `layouts/single.html` and `layouts/list.html` — render the article body; the heading comes from the content H1
-- `layouts/partials/docs/title.html` — derives menu/header/browser titles from the first H1 in content
-- `layouts/partials/opengraph.html`, `layouts/partials/schema.html`, and `layouts/_default/rss.xml` — keep social/RSS metadata titles in sync with the H1-derived title
+- `layouts/_partials/docs/title.html` — derives menu/header/browser titles from the first H1 in content
+- `layouts/_partials/opengraph.html`, `layouts/_partials/schema.html`, and `layouts/_default/rss.xml` — keep social/RSS metadata titles in sync with the H1-derived title
+- `layouts/_partials/docs/html-head.html`, `html-head-title.html`, `html-head-favicon.html`, `meta-description.html` — meta description via the shared partial, home-title without separator, light/dark favicons via media queries
+- `assets/js/topbar.js`, `assets/js/shiki.js` — mobile top bar + client-side Shiki fallback
 - each section `_index.md` sets `bookCollapseSection: true` so the sidebar stays compact
+
+There are no project-level layout/style overrides left: the project's `layouts/` and
+`assets/` directories are empty and everything lives inside the theme.
 
 The old VitePress config, stats generator, custom minimal-book theme, `meta.json`
 files and npm build scripts have been removed.
+
+**Comment style**: keep code comments short and minimal — a brief single line when
+needed, nothing more. Drop comments that merely restate the code.
 
 **Frontmatter conventions**: page titles come from the first H1 in each document, so
 do not put `title` in frontmatter. `weight` controls order within a section (converted

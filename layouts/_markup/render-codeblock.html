@@ -1,2 +1,0 @@
-{{- $lang := .Type | default "text" -}}
-<pre tabindex="0"><code class="language-{{ $lang }}" data-lang="{{ $lang }}">{{ .Inner | htmlEscape | safeHTML }}</code></pre>
