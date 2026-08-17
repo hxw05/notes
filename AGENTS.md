@@ -2,9 +2,10 @@
 
 This file provides guidance to AI coding agents working in this repository.
 
-## Do not commit automatically
+## Do not commit automatically in the main project
 
-You should never commit automatically.
+- You should never commit automatically in the main project.
+- You can commit automatically in the hugo-book theme git submodule, but you should be concise on commit messages and follow Conventional Commit Specifications.
 
 ## Build commands
 
