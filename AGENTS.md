@@ -58,7 +58,7 @@ changes. The customizations are:
 - `layouts/_markup/render-codeblock.html` — emits raw code blocks for Shiki (build-time + client fallback)
 - `scripts/shiki.mjs` — pre-renders Shiki light/dark themes into `public/`
 - `layouts/_markup/render-passthrough.html` — wraps math delimiters for MathJax
-- `layouts/_markup/render-link.html` — rewrites internal `.md` links to Hugo page URLs (replaces the theme's `BookPortableLinks` mechanism)
+- `layouts/_markup/render-link.html` — rewrites internal `.md` links to Hugo page URLs (replaces the theme's `BookPortableLinks` mechanism); external links (scheme or protocol-relative URLs, unless pointing at the site's own host) get `target="_blank" rel="noopener"`
 - `layouts/_markup/render-image.html` — rewrites relative image paths to their built Hugo URLs (replaces `BookPortableLinks`)
 - `layouts/_shortcodes/admonition.html` — supports the migrated `:::tip/info/warning/details` containers
 - `layouts/_partials/docs/toc.html` — strips inline code/emphasis styling from TOC entries
@@ -71,6 +71,7 @@ changes. The customizations are:
 - `layouts/_partials/opengraph.html`, `layouts/_partials/schema.html`, and `layouts/_default/rss.xml` — keep social/RSS metadata titles in sync with the H1-derived title
 - `layouts/_partials/docs/html-head.html`, `html-head-title.html`, `html-head-favicon.html`, `meta-description.html` — meta description via the shared partial, home-title without separator, light/dark favicons via media queries
 - `assets/js/topbar.js`, `assets/js/shiki.js` — mobile top bar + client-side Shiki fallback
+- `assets/js/theme-toggle.js` — day/night/auto theme toggle: the `#theme-toggle` link cycles modes, `#theme-value` shows the current mode (both used on the homepage), persisted in `localStorage` under `whx-theme`; a tiny inline script in `inject/head.html` applies the saved theme before first paint
 - `layouts/_partials/docs/menu-filetree.html` — sections are collapsible by default (`bookCollapseSection` defaults to `true` for sections only; set it to `false` in a section's `_index.md` to opt out), so per-section frontmatter is no longer needed to keep the sidebar compact
 - Empty sections (`agent_diary/`, `ai_readings/`, `frontend/`, `modern_js/`, `leetcode/`, `how_to/`, `gopl/`, `rust_book/`) keep a bare `_index.md` with `build.render: false` — deleting it would NOT 404 the section (Hugo ≥0.165 auto-generates list pages for `_index.md`-less sections); the flag suppresses the page while the sidebar keeps a link-less collapsible group. Only `cmd/` and `missing_2020/` have real section pages
 
