@@ -1,4 +1,0 @@
----
-build:
-  render: false
----
