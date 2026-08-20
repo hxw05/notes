@@ -62,16 +62,17 @@ changes. The customizations are:
 - `layouts/_markup/render-image.html` — rewrites relative image paths to their built Hugo URLs (replaces `BookPortableLinks`)
 - `layouts/_shortcodes/admonition.html` — supports the migrated `:::tip/info/warning/details` containers
 - `layouts/_partials/docs/toc.html` — strips inline code/emphasis styling from TOC entries
-- `assets/styles/custom.css` — admonition/math styling, CJK spacing, grayscale dark mode (replaces the theme's Nord palette), Shiki dark variables, mobile drawer styles
+- `assets/styles/custom.css` — admonition/math styling, CJK spacing, grayscale dark mode (replaces the theme's Nord palette), Shiki dark variables, mobile drawer styles, post-date block on single pages
 - `layouts/baseof.html` — the mobile drawer mechanism is de-hacked: the theme's hidden-checkbox inputs and `:checked` sibling selectors are replaced by `body.menu-open` / `body.toc-open` classes toggled from `assets/js/topbar.js`; the overlay label becomes a plain div (`#menu-overlay`), and the drawers get ids (`#menu-drawer`, `#toc-drawer`) for the toggle buttons' `aria-controls`
 - `layouts/_partials/docs/header.html` — the mobile top bar: real `<button>` toggles (`#menu-toggle`, `#toc-toggle`, with `aria-expanded`) instead of the theme's label/checkbox pair
 - `layouts/_partials/docs/inject/body.html` — enables medium-zoom, a client-side Shiki fallback for `hugo server`, and the mobile top bar (`assets/js/topbar.js` + fixed-bar/drawer styles in `assets/styles/custom.css` under the ≤56rem breakpoint)
-- `layouts/single.html` and `layouts/list.html` — render the article body; the heading comes from the content H1
-- `layouts/_partials/docs/title.html` — derives menu/header/browser titles from the first H1 in content
+- `layouts/single.html` and `layouts/list.html` — render the article body; the heading comes from the content H1; single pages show a plain date line (`2006年1月2日`, no icon) above the heading when the frontmatter has a `date` (checked via `.Params.Date` so git/mtime fallbacks don't trigger it)
+- `layouts/_partials/docs/title.html` — derives menu/header/browser titles from the first H1 in content; sections without an H1 fall back to the raw directory name (no humanize/pluralize)
 - `layouts/_partials/opengraph.html`, `layouts/_partials/schema.html`, and `layouts/_default/rss.xml` — keep social/RSS metadata titles in sync with the H1-derived title
 - `layouts/_partials/docs/html-head.html`, `html-head-title.html`, `html-head-favicon.html`, `meta-description.html` — meta description via the shared partial, home-title without separator, light/dark favicons via media queries
 - `assets/js/topbar.js`, `assets/js/shiki.js` — mobile top bar + client-side Shiki fallback
-- each section `_index.md` sets `bookCollapseSection: true` so the sidebar stays compact
+- `layouts/_partials/docs/menu-filetree.html` — sections are collapsible by default (`bookCollapseSection` defaults to `true` for sections only; set it to `false` in a section's `_index.md` to opt out), so per-section frontmatter is no longer needed to keep the sidebar compact
+- Empty sections (`agent_diary/`, `ai_readings/`, `frontend/`, `modern_js/`, `leetcode/`, `how_to/`, `gopl/`, `rust_book/`) keep a bare `_index.md` with `build.render: false` — deleting it would NOT 404 the section (Hugo ≥0.165 auto-generates list pages for `_index.md`-less sections); the flag suppresses the page while the sidebar keeps a link-less collapsible group. Only `cmd/` and `missing_2020/` have real section pages
 
 There are no project-level layout/style overrides left: the project's `layouts/` and
 `assets/` directories are empty and everything lives inside the theme.

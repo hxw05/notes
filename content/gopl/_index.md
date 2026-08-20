@@ -1,6 +1,4 @@
 ---
-bookCollapseSection: true
-description: "[The Go Programming Language](https://www.gopl.io/)阅读记录及相关 Go 语言学习记录"
+build:
+  render: false
 ---
-
-# gopl

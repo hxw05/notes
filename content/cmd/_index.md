@@ -1,7 +1,3 @@
----
-bookCollapseSection: true
----
-
 # cmd
 
 本分类下的笔记，主要记录在日常学习和工作中用到的一些命令行的pattern，以便将来查阅和复用。

@@ -1,6 +1,4 @@
 ---
-bookCollapseSection: true
-description: "为了面试的 LeetCode 刷题记录"
+build:
+  render: false
 ---
-
-# leetcode

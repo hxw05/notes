@@ -1,7 +1,3 @@
----
-bookCollapseSection: true
----
-
 # missing_2020
 
 几乎同一时期，我在[CSDIY](https://csdiy.wiki/)和哔哩哔哩了解到了 *The Missing Semester of Your CS Education*（简称 Missing Semester，“遗失的学期”）这门课程。这是麻省理工大学的一门公开课，自从当年（2019，2020年）就广受好评，其课堂教学录屏以及Lecture Note均在互联网上开放供所有人查看。我很庆幸能够在其开课的五年后见识到这门课程。2026年年初，这门课程再一次开课。

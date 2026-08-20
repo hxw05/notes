@@ -1,6 +1,4 @@
 ---
-bookCollapseSection: true
-description: "Agent 工具的使用流水账"
+build:
+  render: false
 ---
-
-# agent_diary

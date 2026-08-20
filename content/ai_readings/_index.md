@@ -1,6 +1,4 @@
 ---
-bookCollapseSection: true
-description: "AI 相关阅读记录"
+build:
+  render: false
 ---
-
-# ai_readings

@@ -1,6 +1,4 @@
 ---
-bookCollapseSection: true
-description: "步骤记录"
+build:
+  render: false
 ---
-
-# how_to
