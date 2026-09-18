@@ -2,6 +2,6 @@
 __MACOSX
 node_modules
 .vscode
-.vitepress/cache
-.vitepress/dist
-pi-generated/
+.docusaurus
+build
+pi-generated

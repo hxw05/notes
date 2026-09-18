@@ -19,8 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -29,17 +27,13 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run gen-stats-linux
-
-      - run: npm run gen-meta
-
-      - run: npm run docs:build
+      - run: npm run build
 
       - uses: actions/configure-pages@v4
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .vitepress/dist
+          path: build
 
       - uses: actions/deploy-pages@v4
         id: deploy

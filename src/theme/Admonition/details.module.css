@@ -1,0 +1,21 @@
+.details {
+	margin-bottom: var(--ifm-leading);
+	padding: 0 1rem;
+	border: 1px solid var(--ifm-color-emphasis-300);
+	border-radius: var(--ifm-global-radius);
+	background-color: var(--ifm-background-surface-color);
+}
+
+.summary {
+	cursor: pointer;
+	padding: 0.6rem 0;
+	font-weight: 600;
+}
+
+.content {
+	padding-bottom: 0.5rem;
+}
+
+.content > :last-child {
+	margin-bottom: 0;
+}

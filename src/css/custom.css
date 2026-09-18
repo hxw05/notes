@@ -1,0 +1,85 @@
+@import 'katex/dist/katex.min.css';
+
+:root {
+	--ifm-color-primary: #0071e3;
+	--ifm-color-primary-dark: #0066cc;
+	--ifm-color-primary-darker: #0060c2;
+	--ifm-color-primary-darkest: #005199;
+	--ifm-color-primary-light: #1a7de5;
+	--ifm-color-primary-lighter: #2997ff;
+	--ifm-color-primary-lightest: #6bbfff;
+	--ifm-font-family-base: 'SF Pro', 'Segoe UI', ui-sans-serif, 'PingFang SC',
+		'微软雅黑', 'Microsoft Yahei', 'Microsoft Yahei UI', sans-serif;
+	--ifm-font-family-monospace: 'Menlo', 'Cascadia Code', 'Cascadia Mono',
+		'Consolas', monospace;
+	--ifm-link-decoration: none;
+}
+
+[data-theme='dark'] {
+	--ifm-color-primary: #66bbff;
+	--ifm-color-primary-dark: #4da8ff;
+	--ifm-color-primary-darker: #3399e0;
+	--ifm-color-primary-darkest: #1a7acc;
+	--ifm-color-primary-light: #8dd4ff;
+	--ifm-color-primary-lighter: #a6dfff;
+	--ifm-color-primary-lightest: #ceeeff;
+	--ifm-font-color-base: #f0f0f0;
+}
+
+.markdown a {
+	text-decoration: none;
+}
+
+.markdown a:hover {
+	text-decoration: underline;
+}
+
+.markdown li {
+	line-height: 1.85;
+}
+
+.markdown img {
+	display: block;
+	margin: 0 auto;
+	max-width: min(700px, 100%);
+}
+
+.markdown img + em,
+.markdown .docusaurus-mermaid-container + p em,
+.markdown div[class*='language-'] + p em {
+	display: block;
+	text-align: center;
+	margin: 4px auto;
+	color: var(--ifm-color-emphasis-600);
+	font-size: 14px;
+	font-style: normal;
+}
+
+.menu__link--active {
+	font-weight: 700;
+}
+
+.docusaurus-mermaid-container svg {
+	margin: 0 auto;
+}
+
+.docusaurus-mermaid-container svg g.edgeLabel foreignObject,
+.docusaurus-mermaid-container svg g.label foreignObject {
+	overflow: visible;
+}
+
+.medium-zoom-overlay {
+	background: rgba(255, 255, 255, 0.8) !important;
+}
+
+[data-theme='dark'] .medium-zoom-overlay {
+	background: rgba(0, 0, 0, 0.9) !important;
+}
+
+.medium-zoom-overlay {
+	z-index: 30;
+}
+
+.medium-zoom-image--opened {
+	z-index: 31;
+}
