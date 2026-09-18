@@ -66,6 +66,11 @@ const isCategoryIndex = ({fileName}: {fileName: string}): boolean =>
 	['index', 'readme'].includes(fileName.toLowerCase());
 
 /**
+ * 首页只在导航栏暴露，不进入侧栏条目。
+ */
+const isHomeDoc = (doc: GeneratorDoc): boolean => doc.frontMatter?.slug === '/';
+
+/**
  * 沿用旧站点的侧栏顺序：先看 order，再看 date，最后按标题自然序。
  */
 export const sidebarItemsGenerator: GeneratorOption = async ({
@@ -74,6 +79,22 @@ export const sidebarItemsGenerator: GeneratorOption = async ({
 	...args
 }) => {
 	const metas = new Map(docs.map((doc) => [doc.id, docMeta(doc)]));
+	const homeIds = new Set(docs.filter(isHomeDoc).map((doc) => doc.id));
+
+	const prune = (items: GeneratedItem[]): GeneratedItem[] =>
+		items
+			.filter(
+				(item) =>
+					!(
+						(item.type === 'doc' || item.type === 'ref') &&
+						homeIds.has(item.id)
+					),
+			)
+			.map((item) =>
+				item.type === 'category'
+					? {...item, items: prune(item.items)}
+					: item,
+			);
 
 	const sort = (items: GeneratedItem[]): GeneratedItem[] =>
 		[...items]
@@ -85,6 +106,8 @@ export const sidebarItemsGenerator: GeneratorOption = async ({
 			);
 
 	return sort(
-		await defaultSidebarItemsGenerator({...args, docs, isCategoryIndex}),
+		prune(
+			await defaultSidebarItemsGenerator({...args, docs, isCategoryIndex}),
+		),
 	);
 };

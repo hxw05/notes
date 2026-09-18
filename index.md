@@ -1,6 +1,6 @@
 ---
 slug: /
-unlisted: true
+displayed_sidebar: main
 ---
 
 # whxnotes

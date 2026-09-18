@@ -1,28 +1,39 @@
 @import 'katex/dist/katex.min.css';
+@import '@fontsource/pt-sans/latin-400.css';
+@import '@fontsource/pt-sans/latin-400-italic.css';
+@import '@fontsource/pt-sans/latin-700.css';
+@import '@fontsource/pt-sans/latin-700-italic.css';
+@import '@fontsource/pt-sans-narrow/latin-400.css';
+@import '@fontsource/pt-sans-narrow/latin-700.css';
 
 :root {
-	--ifm-color-primary: #0071e3;
-	--ifm-color-primary-dark: #0066cc;
-	--ifm-color-primary-darker: #0060c2;
-	--ifm-color-primary-darkest: #005199;
-	--ifm-color-primary-light: #1a7de5;
-	--ifm-color-primary-lighter: #2997ff;
-	--ifm-color-primary-lightest: #6bbfff;
-	--ifm-font-family-base: 'SF Pro', 'Segoe UI', ui-sans-serif, 'PingFang SC',
-		'微软雅黑', 'Microsoft Yahei', 'Microsoft Yahei UI', sans-serif;
+	--ifm-color-primary: #457cba;
+	--ifm-color-primary-dark: #3d6da4;
+	--ifm-color-primary-darker: #376395;
+	--ifm-color-primary-darkest: #294a70;
+	--ifm-color-primary-light: #5789c1;
+	--ifm-color-primary-lighter: #729bcb;
+	--ifm-color-primary-lightest: #9ebbdb;
+	--ifm-font-family-base: 'PT Sans', ui-sans-serif, system-ui, 'Segoe UI',
+		'PingFang SC', '微软雅黑', 'Microsoft Yahei', 'Microsoft Yahei UI',
+		sans-serif;
+	--ifm-heading-font-family: 'PT Sans Narrow', 'PT Sans', ui-sans-serif,
+		system-ui, 'Segoe UI', 'PingFang SC', '微软雅黑', 'Microsoft Yahei',
+		'Microsoft Yahei UI', sans-serif;
 	--ifm-font-family-monospace: 'Menlo', 'Cascadia Code', 'Cascadia Mono',
 		'Consolas', monospace;
 	--ifm-link-decoration: none;
+	text-autospace: normal;
 }
 
 [data-theme='dark'] {
-	--ifm-color-primary: #66bbff;
-	--ifm-color-primary-dark: #4da8ff;
-	--ifm-color-primary-darker: #3399e0;
-	--ifm-color-primary-darkest: #1a7acc;
-	--ifm-color-primary-light: #8dd4ff;
-	--ifm-color-primary-lighter: #a6dfff;
-	--ifm-color-primary-lightest: #ceeeff;
+	--ifm-color-primary: #8eb0d7;
+	--ifm-color-primary-dark: #7ba3d1;
+	--ifm-color-primary-darker: #5186c2;
+	--ifm-color-primary-darkest: #3c6faa;
+	--ifm-color-primary-light: #acc5e2;
+	--ifm-color-primary-lighter: #c3d5ea;
+	--ifm-color-primary-lightest: #e1eaf4;
 	--ifm-font-color-base: #f0f0f0;
 }
 
@@ -36,6 +47,16 @@
 
 .markdown li {
 	line-height: 1.85;
+}
+
+.katex {
+	margin-left: 0.2em;
+	margin-right: 0.2em;
+}
+
+.katex-display > .katex {
+	margin-left: 0;
+	margin-right: 0;
 }
 
 .markdown img {
@@ -55,6 +76,27 @@
 	font-style: normal;
 }
 
+.theme-code-block {
+	--prism-background-color: #f6f6f6 !important;
+}
+
+[data-theme='dark'] .theme-code-block {
+	--prism-background-color: #2e2e2e !important;
+}
+
+.theme-code-block pre {
+	background-color: var(--prism-background-color) !important;
+}
+
+.navbar__title {
+	font-family: var(--ifm-heading-font-family);
+	font-size: 1.25rem;
+}
+
+.menu__link {
+	font-weight: var(--ifm-font-weight-normal);
+}
+
 .menu__link--active {
 	font-weight: 700;
 }
@@ -70,16 +112,13 @@
 
 .medium-zoom-overlay {
 	background: rgba(255, 255, 255, 0.8) !important;
+	z-index: var(--ifm-z-index-overlay);
 }
 
 [data-theme='dark'] .medium-zoom-overlay {
 	background: rgba(0, 0, 0, 0.9) !important;
 }
 
-.medium-zoom-overlay {
-	z-index: 30;
-}
-
 .medium-zoom-image--opened {
-	z-index: 31;
+	z-index: calc(var(--ifm-z-index-overlay) + 1);
 }
