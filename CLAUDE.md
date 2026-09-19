@@ -24,4 +24,6 @@ Content lives in project directories at the repo root: `agent_diary/`, `ai_readi
 
 **Markdown pipeline** (`docusaurus.config.ts`): `remark-math` + `rehype-katex` with the macros `\set`, `\Z`, `\R`, `\Q`, `\C`; `remark-cjk-friendly`; Mermaid diagrams; admonitions plus the custom `details` keyword, written as `:::details[标题]`.
 
-**Theme overrides** in `src/theme`: `DocItem/Content` (medium-zoom on images) and `Admonition/Types` (the `details` container). `src/css/custom.css` holds brand colors and shared reading styles. Static files (favicon, `robots.txt`) go in `static/`.
+**Theme overrides** in `src/theme`: `DocItem/Content` (medium-zoom on images) and `Admonition/Types` (the `details` container). `src/css/custom.css` holds brand colors and shared reading styles. Static files (`w.png`, `w-invert.png`, `robots.txt`) go in `static/`.
+
+**Favicon**: `docusaurus.config.ts` declares the two `headTags` icon links (`media: (prefers-color-scheme: light/dark)`), which cover the first paint and no-JS visitors; `src/clientModules/favicon.ts` then keeps a single icon link in sync with `data-theme`, because the theme toggle can override the OS preference. Don't set the `favicon` config option: it injects an unconditional icon link that competes with the media pair and is re-managed by react-helmet on navigation.

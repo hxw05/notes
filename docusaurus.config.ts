@@ -12,7 +12,7 @@ const config: Config = {
 	tagline: 'Notes taken by whx',
 	url: 'https://notes.wanghaoxiang.com',
 	baseUrl: '/',
-	favicon: 'w.png',
+	clientModules: ['./src/clientModules/favicon.ts'],
 	organizationName: 'hxw05',
 	projectName: 'notes',
 	trailingSlash: false,
