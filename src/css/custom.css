@@ -7,17 +7,17 @@
 @import '@fontsource/pt-sans-narrow/latin-700.css';
 
 :root {
-	--ifm-color-primary: #457cba;
-	--ifm-color-primary-dark: #3d6da4;
-	--ifm-color-primary-darker: #376395;
-	--ifm-color-primary-darkest: #294a70;
-	--ifm-color-primary-light: #5789c1;
-	--ifm-color-primary-lighter: #729bcb;
-	--ifm-color-primary-lightest: #9ebbdb;
-	--ifm-font-family-base: 'PT Sans', ui-sans-serif, system-ui, 'Segoe UI',
+	--ifm-color-primary: #2e7bd1;
+	--ifm-color-primary-dark: #286cb9;
+	--ifm-color-primary-darker: #2462a8;
+	--ifm-color-primary-darkest: #1b497e;
+	--ifm-color-primary-light: #4288d6;
+	--ifm-color-primary-lighter: #609add;
+	--ifm-color-primary-lightest: #92bae7;
+	--ifm-font-family-base: ui-sans-serif, system-ui, 'Segoe UI',
 		'PingFang SC', '微软雅黑', 'Microsoft Yahei', 'Microsoft Yahei UI',
 		sans-serif;
-	--ifm-heading-font-family: 'PT Sans Narrow', 'PT Sans', ui-sans-serif,
+	--ifm-heading-font-family: ui-sans-serif,
 		system-ui, 'Segoe UI', 'PingFang SC', '微软雅黑', 'Microsoft Yahei',
 		'Microsoft Yahei UI', sans-serif;
 	--ifm-font-family-monospace: 'Menlo', 'Cascadia Code', 'Cascadia Mono',
@@ -27,13 +27,13 @@
 }
 
 [data-theme='dark'] {
-	--ifm-color-primary: #8eb0d7;
-	--ifm-color-primary-dark: #7ba3d1;
-	--ifm-color-primary-darker: #5186c2;
-	--ifm-color-primary-darkest: #3c6faa;
-	--ifm-color-primary-light: #acc5e2;
-	--ifm-color-primary-lighter: #c3d5ea;
-	--ifm-color-primary-lightest: #e1eaf4;
+	--ifm-color-primary: #7fafe6;
+	--ifm-color-primary-dark: #6aa2e2;
+	--ifm-color-primary-darker: #3a85d9;
+	--ifm-color-primary-darkest: #266dc0;
+	--ifm-color-primary-light: #a1c4ed;
+	--ifm-color-primary-lighter: #bbd4f2;
+	--ifm-color-primary-lightest: #ddeaf8;
 	--ifm-font-color-base: #f0f0f0;
 }
 
