@@ -73,7 +73,7 @@ pi不支持MCP的一大考虑是MCP工具往往会引入较大的上下文负担
 
 CLI工具+README是这里提出的用于代替MCP的方法，例如用一个基于Puppeteer的CLI工具来代替Playwright MCP或Chrome DevTools MCP。其实随着日常对agent的使用，很容易想到这种“工具+文档”的模式。这种模式还可以进一步衍生出目录结构和扮演目录索引的README文件。这些实现都很像Anthropic提出的Skill，但属于更加专门的、未标准化的实现。
 
-CLI工具相比于MCP要更为轻量，且没有上面所说的通用性带来的问题（假设这是我们自己定制的）。我们使用的时候，只需要用@mention去提及相应工具的README文件来将其导入到上下文中。这种mention的方式相比与Skill的progressive disclosure要更加可靠，后者在很多时候与模型能力有关：模型是否参考Skill，或是依靠自己的旧认知，或是幻觉认知，完全取决于模型自身，这一点的体现可见于我的[这篇记录](../agent_diary/deepseek-cant-do-liquid-glass.md)。
+CLI工具相比于MCP要更为轻量，且没有上面所说的通用性带来的问题（假设这是我们自己定制的）。我们使用的时候，只需要用@mention去提及相应工具的README文件来将其导入到上下文中。这种mention的方式相比与Skill的progressive disclosure要更加可靠，后者在很多时候与模型能力有关：模型是否参考Skill，或是依靠自己的旧认知，或是幻觉认知，完全取决于模型自身，这一点的体现可见于我的[这篇记录](../ai/deepseek-cant-do-liquid-glass.md)。
 
 #### 一种形式的转变
 
