@@ -1,11 +1,10 @@
 ---
 date: 2026/05/30
-origin:
-    author: Simon Willison
-    date: 2023/04/25
-    link: https://simonwillison.net/2023/Apr/25/dual-llm-pattern/
 ---
 # 防止提示词注入的双模型设计
+
+- 原文链接：https://simonwillison.net/2023/Apr/25/dual-llm-pattern/
+- 原文发布日期：2023年4月25日
 
 agent总是要与外界交互：读取文件、执行指令、编辑或删除文件等。在这个过程中，文件中的信息会被包含到上下文中供模型理解。提示词注入（prompt injection）就发生在这个过程：如果agent读取的信息中包含一些精心调配的恶意提示词，就有可能引导agent在任务执行的过程中走向歧途。
 

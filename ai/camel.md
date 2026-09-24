@@ -1,12 +1,11 @@
 ---
 date: 2026/05/31
-origin:
-    link: https://simonwillison.net/2025/Apr/11/camel/
-    date: 2025/04/11
-    author: Simon Willison
 ---
 
 # 一种减弱提示词注入攻击的新方向 CaMeL
+
+- 原文链接：https://simonwillison.net/2025/Apr/11/camel/
+- 原文发布日期：2025年4月11日
 
 :::tip
 本文的前置文章为[防止提示词注入的双模型设计](./dual-llm-pattern.md)
